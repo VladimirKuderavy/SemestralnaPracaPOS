@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/tmp/tmp.ZMMKmqBmHt/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.oWSNRz4JXy/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/tmp/tmp.ZMMKmqBmHt/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/tmp/tmp.ZMMKmqBmHt/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.oWSNRz4JXy/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="SemestralnaPracaPOS">
-				<Option output="/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/SemestralnaPracaPOS" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.ZMMKmqBmHt/cmake-build-debug"/>
+			<Target title="edit_cache">
+				<Option working_dir="/tmp/tmp.oWSNRz4JXy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="client">
+				<Option output="/tmp/tmp.oWSNRz4JXy/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.oWSNRz4JXy/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -53,15 +53,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 SemestralnaPracaPOS"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 client"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="SemestralnaPracaPOS/fast">
-				<Option output="/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/SemestralnaPracaPOS" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.ZMMKmqBmHt/cmake-build-debug"/>
+			<Target title="client/fast">
+				<Option output="/tmp/tmp.oWSNRz4JXy/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.oWSNRz4JXy/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -75,17 +75,88 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 SemestralnaPracaPOS/fast"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 client/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="server">
+				<Option output="/tmp/tmp.oWSNRz4JXy/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.oWSNRz4JXy/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/10"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/10"/>
+					<Add directory="/usr/include/c++/10/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/10/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 server"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="server/fast">
+				<Option output="/tmp/tmp.oWSNRz4JXy/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.oWSNRz4JXy/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/10"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/10"/>
+					<Add directory="/usr/include/c++/10/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/10/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 server/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.oWSNRz4JXy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/tmp/tmp.ZMMKmqBmHt/main.cpp">
-			<Option target="SemestralnaPracaPOS"/>
+		<Unit filename="/tmp/tmp.oWSNRz4JXy/Data.cpp">
+			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.ZMMKmqBmHt/CMakeLists.txt">
+		<Unit filename="/tmp/tmp.oWSNRz4JXy/Data.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.oWSNRz4JXy/Pomocna.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.oWSNRz4JXy/Pomocna.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.oWSNRz4JXy/Pouzivatel.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.oWSNRz4JXy/Pouzivatel.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.oWSNRz4JXy/Prihlasenie.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.oWSNRz4JXy/Prihlasenie.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.oWSNRz4JXy/client.cpp">
+			<Option target="client"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.oWSNRz4JXy/main.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.oWSNRz4JXy/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

@@ -4,7 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/tmp/tmp.ZMMKmqBmHt/main.cpp" "/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.o"
+  "/tmp/tmp.oWSNRz4JXy/Data.cpp" "/tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles/SemestralnaPracaPOS.dir/Data.cpp.o"
+  "/tmp/tmp.oWSNRz4JXy/Pomocna.cpp" "/tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles/SemestralnaPracaPOS.dir/Pomocna.cpp.o"
+  "/tmp/tmp.oWSNRz4JXy/Pouzivatel.cpp" "/tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles/SemestralnaPracaPOS.dir/Pouzivatel.cpp.o"
+  "/tmp/tmp.oWSNRz4JXy/Prihlasenie.cpp" "/tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles/SemestralnaPracaPOS.dir/Prihlasenie.cpp.o"
+  "/tmp/tmp.oWSNRz4JXy/client.cpp" "/tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles/SemestralnaPracaPOS.dir/client.cpp.o"
+  "/tmp/tmp.oWSNRz4JXy/main.cpp" "/tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

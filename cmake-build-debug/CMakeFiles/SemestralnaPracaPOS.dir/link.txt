@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.o -o SemestralnaPracaPOS 
+/usr/bin/c++ -g CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.o CMakeFiles/SemestralnaPracaPOS.dir/client.cpp.o CMakeFiles/SemestralnaPracaPOS.dir/Pouzivatel.cpp.o CMakeFiles/SemestralnaPracaPOS.dir/Data.cpp.o CMakeFiles/SemestralnaPracaPOS.dir/Prihlasenie.cpp.o CMakeFiles/SemestralnaPracaPOS.dir/Pomocna.cpp.o -o SemestralnaPracaPOS 

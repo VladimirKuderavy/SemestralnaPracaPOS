@@ -67,24 +67,13 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /tmp/tmp.ZMMKmqBmHt
+CMAKE_SOURCE_DIR = /tmp/tmp.oWSNRz4JXy
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /tmp/tmp.ZMMKmqBmHt/cmake-build-debug
+CMAKE_BINARY_DIR = /tmp/tmp.oWSNRz4JXy/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -97,11 +86,22 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.ZMMKmqBmHt/cmake-build-debug/CMakeFiles /tmp/tmp.ZMMKmqBmHt/cmake-build-debug//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles /tmp/tmp.oWSNRz4JXy/cmake-build-debug//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.ZMMKmqBmHt/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -130,17 +130,165 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named SemestralnaPracaPOS
+# Target rules for targets named client
 
 # Build rule for target.
-SemestralnaPracaPOS: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SemestralnaPracaPOS
-.PHONY : SemestralnaPracaPOS
+client: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 client
+.PHONY : client
 
 # fast build rule for target.
-SemestralnaPracaPOS/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestralnaPracaPOS.dir/build.make CMakeFiles/SemestralnaPracaPOS.dir/build
-.PHONY : SemestralnaPracaPOS/fast
+client/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/build
+.PHONY : client/fast
+
+#=============================================================================
+# Target rules for targets named server
+
+# Build rule for target.
+server: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 server
+.PHONY : server
+
+# fast build rule for target.
+server/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
+.PHONY : server/fast
+
+Data.o: Data.cpp.o
+
+.PHONY : Data.o
+
+# target to build an object file
+Data.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Data.cpp.o
+.PHONY : Data.cpp.o
+
+Data.i: Data.cpp.i
+
+.PHONY : Data.i
+
+# target to preprocess a source file
+Data.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Data.cpp.i
+.PHONY : Data.cpp.i
+
+Data.s: Data.cpp.s
+
+.PHONY : Data.s
+
+# target to generate assembly for a file
+Data.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Data.cpp.s
+.PHONY : Data.cpp.s
+
+Pomocna.o: Pomocna.cpp.o
+
+.PHONY : Pomocna.o
+
+# target to build an object file
+Pomocna.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Pomocna.cpp.o
+.PHONY : Pomocna.cpp.o
+
+Pomocna.i: Pomocna.cpp.i
+
+.PHONY : Pomocna.i
+
+# target to preprocess a source file
+Pomocna.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Pomocna.cpp.i
+.PHONY : Pomocna.cpp.i
+
+Pomocna.s: Pomocna.cpp.s
+
+.PHONY : Pomocna.s
+
+# target to generate assembly for a file
+Pomocna.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Pomocna.cpp.s
+.PHONY : Pomocna.cpp.s
+
+Pouzivatel.o: Pouzivatel.cpp.o
+
+.PHONY : Pouzivatel.o
+
+# target to build an object file
+Pouzivatel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Pouzivatel.cpp.o
+.PHONY : Pouzivatel.cpp.o
+
+Pouzivatel.i: Pouzivatel.cpp.i
+
+.PHONY : Pouzivatel.i
+
+# target to preprocess a source file
+Pouzivatel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Pouzivatel.cpp.i
+.PHONY : Pouzivatel.cpp.i
+
+Pouzivatel.s: Pouzivatel.cpp.s
+
+.PHONY : Pouzivatel.s
+
+# target to generate assembly for a file
+Pouzivatel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Pouzivatel.cpp.s
+.PHONY : Pouzivatel.cpp.s
+
+Prihlasenie.o: Prihlasenie.cpp.o
+
+.PHONY : Prihlasenie.o
+
+# target to build an object file
+Prihlasenie.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Prihlasenie.cpp.o
+.PHONY : Prihlasenie.cpp.o
+
+Prihlasenie.i: Prihlasenie.cpp.i
+
+.PHONY : Prihlasenie.i
+
+# target to preprocess a source file
+Prihlasenie.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Prihlasenie.cpp.i
+.PHONY : Prihlasenie.cpp.i
+
+Prihlasenie.s: Prihlasenie.cpp.s
+
+.PHONY : Prihlasenie.s
+
+# target to generate assembly for a file
+Prihlasenie.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Prihlasenie.cpp.s
+.PHONY : Prihlasenie.cpp.s
+
+client.o: client.cpp.o
+
+.PHONY : client.o
+
+# target to build an object file
+client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.o
+.PHONY : client.cpp.o
+
+client.i: client.cpp.i
+
+.PHONY : client.i
+
+# target to preprocess a source file
+client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.i
+.PHONY : client.cpp.i
+
+client.s: client.cpp.s
+
+.PHONY : client.s
+
+# target to generate assembly for a file
+client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.s
+.PHONY : client.cpp.s
 
 main.o: main.cpp.o
 
@@ -148,7 +296,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestralnaPracaPOS.dir/build.make CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -157,7 +305,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestralnaPracaPOS.dir/build.make CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -166,7 +314,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SemestralnaPracaPOS.dir/build.make CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -177,7 +325,23 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... SemestralnaPracaPOS"
+	@echo "... client"
+	@echo "... server"
+	@echo "... Data.o"
+	@echo "... Data.i"
+	@echo "... Data.s"
+	@echo "... Pomocna.o"
+	@echo "... Pomocna.i"
+	@echo "... Pomocna.s"
+	@echo "... Pouzivatel.o"
+	@echo "... Pouzivatel.i"
+	@echo "... Pouzivatel.s"
+	@echo "... Prihlasenie.o"
+	@echo "... Prihlasenie.i"
+	@echo "... Prihlasenie.s"
+	@echo "... client.o"
+	@echo "... client.i"
+	@echo "... client.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

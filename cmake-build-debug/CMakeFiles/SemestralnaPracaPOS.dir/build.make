@@ -62,10 +62,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /tmp/tmp.ZMMKmqBmHt
+CMAKE_SOURCE_DIR = /tmp/tmp.oWSNRz4JXy
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /tmp/tmp.ZMMKmqBmHt/cmake-build-debug
+CMAKE_BINARY_DIR = /tmp/tmp.oWSNRz4JXy/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/SemestralnaPracaPOS.dir/depend.make
@@ -78,28 +78,103 @@ include CMakeFiles/SemestralnaPracaPOS.dir/flags.make
 
 CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.o: CMakeFiles/SemestralnaPracaPOS.dir/flags.make
 CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.o -c /tmp/tmp.ZMMKmqBmHt/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.o -c /tmp/tmp.oWSNRz4JXy/main.cpp
 
 CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /tmp/tmp.ZMMKmqBmHt/main.cpp > CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /tmp/tmp.oWSNRz4JXy/main.cpp > CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.i
 
 CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /tmp/tmp.ZMMKmqBmHt/main.cpp -o CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /tmp/tmp.oWSNRz4JXy/main.cpp -o CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.s
+
+CMakeFiles/SemestralnaPracaPOS.dir/client.cpp.o: CMakeFiles/SemestralnaPracaPOS.dir/flags.make
+CMakeFiles/SemestralnaPracaPOS.dir/client.cpp.o: ../client.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SemestralnaPracaPOS.dir/client.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SemestralnaPracaPOS.dir/client.cpp.o -c /tmp/tmp.oWSNRz4JXy/client.cpp
+
+CMakeFiles/SemestralnaPracaPOS.dir/client.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SemestralnaPracaPOS.dir/client.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /tmp/tmp.oWSNRz4JXy/client.cpp > CMakeFiles/SemestralnaPracaPOS.dir/client.cpp.i
+
+CMakeFiles/SemestralnaPracaPOS.dir/client.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SemestralnaPracaPOS.dir/client.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /tmp/tmp.oWSNRz4JXy/client.cpp -o CMakeFiles/SemestralnaPracaPOS.dir/client.cpp.s
+
+CMakeFiles/SemestralnaPracaPOS.dir/Pouzivatel.cpp.o: CMakeFiles/SemestralnaPracaPOS.dir/flags.make
+CMakeFiles/SemestralnaPracaPOS.dir/Pouzivatel.cpp.o: ../Pouzivatel.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/SemestralnaPracaPOS.dir/Pouzivatel.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SemestralnaPracaPOS.dir/Pouzivatel.cpp.o -c /tmp/tmp.oWSNRz4JXy/Pouzivatel.cpp
+
+CMakeFiles/SemestralnaPracaPOS.dir/Pouzivatel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SemestralnaPracaPOS.dir/Pouzivatel.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /tmp/tmp.oWSNRz4JXy/Pouzivatel.cpp > CMakeFiles/SemestralnaPracaPOS.dir/Pouzivatel.cpp.i
+
+CMakeFiles/SemestralnaPracaPOS.dir/Pouzivatel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SemestralnaPracaPOS.dir/Pouzivatel.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /tmp/tmp.oWSNRz4JXy/Pouzivatel.cpp -o CMakeFiles/SemestralnaPracaPOS.dir/Pouzivatel.cpp.s
+
+CMakeFiles/SemestralnaPracaPOS.dir/Data.cpp.o: CMakeFiles/SemestralnaPracaPOS.dir/flags.make
+CMakeFiles/SemestralnaPracaPOS.dir/Data.cpp.o: ../Data.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/SemestralnaPracaPOS.dir/Data.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SemestralnaPracaPOS.dir/Data.cpp.o -c /tmp/tmp.oWSNRz4JXy/Data.cpp
+
+CMakeFiles/SemestralnaPracaPOS.dir/Data.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SemestralnaPracaPOS.dir/Data.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /tmp/tmp.oWSNRz4JXy/Data.cpp > CMakeFiles/SemestralnaPracaPOS.dir/Data.cpp.i
+
+CMakeFiles/SemestralnaPracaPOS.dir/Data.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SemestralnaPracaPOS.dir/Data.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /tmp/tmp.oWSNRz4JXy/Data.cpp -o CMakeFiles/SemestralnaPracaPOS.dir/Data.cpp.s
+
+CMakeFiles/SemestralnaPracaPOS.dir/Prihlasenie.cpp.o: CMakeFiles/SemestralnaPracaPOS.dir/flags.make
+CMakeFiles/SemestralnaPracaPOS.dir/Prihlasenie.cpp.o: ../Prihlasenie.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SemestralnaPracaPOS.dir/Prihlasenie.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SemestralnaPracaPOS.dir/Prihlasenie.cpp.o -c /tmp/tmp.oWSNRz4JXy/Prihlasenie.cpp
+
+CMakeFiles/SemestralnaPracaPOS.dir/Prihlasenie.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SemestralnaPracaPOS.dir/Prihlasenie.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /tmp/tmp.oWSNRz4JXy/Prihlasenie.cpp > CMakeFiles/SemestralnaPracaPOS.dir/Prihlasenie.cpp.i
+
+CMakeFiles/SemestralnaPracaPOS.dir/Prihlasenie.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SemestralnaPracaPOS.dir/Prihlasenie.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /tmp/tmp.oWSNRz4JXy/Prihlasenie.cpp -o CMakeFiles/SemestralnaPracaPOS.dir/Prihlasenie.cpp.s
+
+CMakeFiles/SemestralnaPracaPOS.dir/Pomocna.cpp.o: CMakeFiles/SemestralnaPracaPOS.dir/flags.make
+CMakeFiles/SemestralnaPracaPOS.dir/Pomocna.cpp.o: ../Pomocna.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SemestralnaPracaPOS.dir/Pomocna.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SemestralnaPracaPOS.dir/Pomocna.cpp.o -c /tmp/tmp.oWSNRz4JXy/Pomocna.cpp
+
+CMakeFiles/SemestralnaPracaPOS.dir/Pomocna.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SemestralnaPracaPOS.dir/Pomocna.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /tmp/tmp.oWSNRz4JXy/Pomocna.cpp > CMakeFiles/SemestralnaPracaPOS.dir/Pomocna.cpp.i
+
+CMakeFiles/SemestralnaPracaPOS.dir/Pomocna.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SemestralnaPracaPOS.dir/Pomocna.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /tmp/tmp.oWSNRz4JXy/Pomocna.cpp -o CMakeFiles/SemestralnaPracaPOS.dir/Pomocna.cpp.s
 
 # Object files for target SemestralnaPracaPOS
 SemestralnaPracaPOS_OBJECTS = \
-"CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.o"
+"CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.o" \
+"CMakeFiles/SemestralnaPracaPOS.dir/client.cpp.o" \
+"CMakeFiles/SemestralnaPracaPOS.dir/Pouzivatel.cpp.o" \
+"CMakeFiles/SemestralnaPracaPOS.dir/Data.cpp.o" \
+"CMakeFiles/SemestralnaPracaPOS.dir/Prihlasenie.cpp.o" \
+"CMakeFiles/SemestralnaPracaPOS.dir/Pomocna.cpp.o"
 
 # External object files for target SemestralnaPracaPOS
 SemestralnaPracaPOS_EXTERNAL_OBJECTS =
 
 SemestralnaPracaPOS: CMakeFiles/SemestralnaPracaPOS.dir/main.cpp.o
+SemestralnaPracaPOS: CMakeFiles/SemestralnaPracaPOS.dir/client.cpp.o
+SemestralnaPracaPOS: CMakeFiles/SemestralnaPracaPOS.dir/Pouzivatel.cpp.o
+SemestralnaPracaPOS: CMakeFiles/SemestralnaPracaPOS.dir/Data.cpp.o
+SemestralnaPracaPOS: CMakeFiles/SemestralnaPracaPOS.dir/Prihlasenie.cpp.o
+SemestralnaPracaPOS: CMakeFiles/SemestralnaPracaPOS.dir/Pomocna.cpp.o
 SemestralnaPracaPOS: CMakeFiles/SemestralnaPracaPOS.dir/build.make
 SemestralnaPracaPOS: CMakeFiles/SemestralnaPracaPOS.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/tmp.ZMMKmqBmHt/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable SemestralnaPracaPOS"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable SemestralnaPracaPOS"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SemestralnaPracaPOS.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -112,6 +187,6 @@ CMakeFiles/SemestralnaPracaPOS.dir/clean:
 .PHONY : CMakeFiles/SemestralnaPracaPOS.dir/clean
 
 CMakeFiles/SemestralnaPracaPOS.dir/depend:
-	cd /tmp/tmp.ZMMKmqBmHt/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /tmp/tmp.ZMMKmqBmHt /tmp/tmp.ZMMKmqBmHt /tmp/tmp.ZMMKmqBmHt/cmake-build-debug /tmp/tmp.ZMMKmqBmHt/cmake-build-debug /tmp/tmp.ZMMKmqBmHt/cmake-build-debug/CMakeFiles/SemestralnaPracaPOS.dir/DependInfo.cmake --color=$(COLOR)
+	cd /tmp/tmp.oWSNRz4JXy/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /tmp/tmp.oWSNRz4JXy /tmp/tmp.oWSNRz4JXy /tmp/tmp.oWSNRz4JXy/cmake-build-debug /tmp/tmp.oWSNRz4JXy/cmake-build-debug /tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles/SemestralnaPracaPOS.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/SemestralnaPracaPOS.dir/depend
 
