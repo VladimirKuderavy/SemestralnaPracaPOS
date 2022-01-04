@@ -10,6 +10,7 @@
 #include <pthread.h>
 #include "Data.h"
 #include "Prihlasenie.h"
+#define PORT 6969
 
 #define POCET_KLIENTOV 2
 
@@ -47,7 +48,7 @@ void* vlaknoFunkcia(void* param) {
 
     sockaddr_in hint;   //toto sa musi pouzit ak je AF_INET
     hint.sin_family = AF_INET;    //musi byt inicializovane na to co je v sockete
-    hint.sin_port = htons(6849 + plus);    //cislo portu
+    hint.sin_port = htons(PORT + plus);    //cislo portu
     inet_pton(AF_INET, "0.0.0.0", &hint.sin_addr);  //IP v4 adresa
 
     //funkcia bind ma tri parametre:

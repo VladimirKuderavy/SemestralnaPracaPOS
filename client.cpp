@@ -8,6 +8,7 @@
 #include <string.h>
 #include <functional>
 #include <pthread.h>
+#define PORT 6969
 
 void* vlaknoZobrazovacFunkcia(void* data) {
     int* sock = (int*) data;
@@ -39,7 +40,7 @@ int main(int argc, char* argv[]) {
         return -1;
     }
     //vytvorenie hint struktury
-    int port = 6849 + atoi(argv[1]);
+    int port = PORT + atoi(argv[1]);
     std::string ipAdresa = "127.0.0.1";
 
     sockaddr_in hint;

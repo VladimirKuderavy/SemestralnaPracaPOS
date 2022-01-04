@@ -9,14 +9,14 @@
 class Pouzivatel {
 private:
     int id;
-    std::string meno;
+    std::string pouzivatelskeMeno;
     std::string heslo;
     std::vector<Pouzivatel*> priatelia;
 
 public:
-    Pouzivatel(int id, std::string meno, std::string heslo) {
+    Pouzivatel(int id, std::string& meno, std::string& heslo) {
         this->id = id;
-        this->meno = meno;
+        this->pouzivatelskeMeno = meno;
         this->heslo = heslo;
     }
     void pridajPriatela(Pouzivatel* pridajTohto) {
@@ -36,10 +36,13 @@ public:
     }
 
     std::string* getMeno() {
-        return &this->meno;
+        return &this->pouzivatelskeMeno;
     }
     bool jeDobreHeslo(std::string* parHeslo) {
         return *parHeslo == this->heslo;
+    }
+    int getId() {
+        return this->id;
     }
 
 };

@@ -31,15 +31,13 @@ private:
 public:
 
     Data () {
-        Pouzivatel* pouzivatel = new Pouzivatel(1, "Andrej", "123");
+        std::string meno = "Andrej";
+        std::string priezvisko = "123";
+        Pouzivatel* pouzivatel = new Pouzivatel(1, meno, priezvisko);
         pouzivatelia.push_back(pouzivatel);
     }
 
-    void pridajPrihlaseneho(Pouzivatel* pouzivatel, int* socket) {
-        Prihlaseny* prihlaseny = new Prihlaseny(pouzivatel, socket);
 
-
-    }
 
     Pouzivatel* prihlas(std::string* meno, std::string* heslo, int* socket) {
 
@@ -53,6 +51,23 @@ public:
         }
         return nullptr;
     }
+
+    void registruj(std::string* meno, std::string* heslo) {
+        Pouzivatel* pouzivatel = new Pouzivatel(pouzivatelia[pouzivatelia.size()-1]->getId()+1, *meno, *heslo);
+        pouzivatelia.push_back(pouzivatel);
+    }
+
+    bool jeMenoUnikatne(std::string meno) {
+        for(int i = 0; i < pouzivatelia.size(); i++) {
+            if(*pouzivatelia[i]->getMeno() == meno) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
 
 
 };

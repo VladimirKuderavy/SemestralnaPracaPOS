@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include "Pomocna.h"
 
 
 class Prihlasenie {
@@ -29,17 +30,11 @@ public:
             send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
 
             //vycistit bufer
-            memset(sprava, 0, 4096);
-            ssize_t bytesRecv = recv(*socket, sprava, 4096, 0);
+            if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+                return nullptr;
+            }
 
-            if(bytesRecv == -1) {
-                std::cerr << "Problem so spojenim";
-                return nullptr;
-            }
-            if(bytesRecv == 0) {
-                std::cout << "Klient sa odpojil" << "\n";
-                return nullptr;
-            }
+
 
             if(sprava[0] == '1') {
                 pouzivatel = prihlasSa(data, socket);
@@ -47,9 +42,9 @@ public:
                     bolUspesnePrihlaseny = true;
                 }
             } else if(sprava[0] == '2') {
-                pouzivatel = registrujSa(data, socket);
-                if(pouzivatel != nullptr) {
-                    bolUspesnePrihlaseny = true;
+                bool dosloKChybe = registrujSa(data, socket);
+                if(dosloKChybe) {
+                    return nullptr;
                 }
             }
 
@@ -62,50 +57,32 @@ private:
         bool uspesnePrihlaseny = false;
         Pouzivatel* pouzivatel = nullptr;
         while(!uspesnePrihlaseny) {
-            std::string stringSprava = "Zadajte meno: \n";
+            std::string stringSprava = "Zadajte pouzivatelske meno: \n";
             send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
 
             char sprava[4096];
-            memset(sprava, 0, 4096);
-
-            ssize_t bytesRecv = recv(*socket, sprava, 4096, 0);
-            if(bytesRecv == -1) {
-                std::cerr << "Problem so spojenim";
-                return nullptr;
-            }
-            if(bytesRecv == 0) {
-                std::cout << "Klient sa odpojil" << "\n";
+            if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
                 return nullptr;
             }
             std::string meno = sprava;
 
 
-            memset(sprava, 0, 4096);
+            stringSprava = "Zadajte heslo: \n";
+            send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
 
-            bytesRecv = recv(*socket, sprava, 4096, 0);
-            if(bytesRecv == -1) {
-                std::cerr << "Problem so spojenim";
+            if(PomocnaTrieda::prijmiSpravu(sprava, socket) ==1) {
                 return nullptr;
             }
-            if(bytesRecv == 0) {
-                std::cout << "Klient sa odpojil" << "\n";
-                return nullptr;
-            }
+
             std::string heslo = sprava;
             pouzivatel = data->prihlas(&meno, &heslo, socket);
+
             if(pouzivatel == nullptr) {
-                stringSprava = "Zadali ste zle meno alebo heslo, chcete skusit znova [1 = ano]?: \n";
+                stringSprava = "Zadali ste zle pouzivatelske meno alebo heslo, chcete skusit znova [1 = ano]?: \n";
                 send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
 
 
-                memset(sprava, 0, 4096);
-                bytesRecv = recv(*socket, sprava, 4096, 0);
-                if(bytesRecv == -1) {
-                    std::cerr << "Problem so spojenim";
-                    return nullptr;
-                }
-                if(bytesRecv == 0) {
-                    std::cout << "Klient sa odpojil" << "\n";
+                if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
                     return nullptr;
                 }
 
@@ -122,16 +99,50 @@ private:
         send(*socket, sprava.c_str(), sprava.size(), 0);
 
 
-
         return pouzivatel;
     }
 
-    static Pouzivatel* registrujSa(Data* data, int* socket) {
+    static bool registrujSa(Data* data, int* socket) {
 
+        bool uspesneZaregistrovany  = false;
+        while(!uspesneZaregistrovany) {
+            char sprava[4096];
+            std::string stringSprava = "Zadajte svoje pouzivatelske meno: \n";
+            send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
 
+            if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+                return true;
+            }
+            std::string meno = sprava;
+            if(data->jeMenoUnikatne(meno)) {
+                stringSprava = "Zadajte svoje heslo: \n";
+                send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
 
+                if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+                    return true;
+                }
+                std::string heslo = sprava;
+                data->registruj(&meno, &heslo);
 
-        return nullptr;
+                stringSprava = "Registracia prebehla uspesne. \n";
+                stringSprava += "Ak chcete, mozete sa prihlasit\n";
+                send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+                uspesneZaregistrovany = true;
+            } else {
+                stringSprava = "Pouzivatelske meno musi byt unikatne, chcete skusit znova?: \n";
+                stringSprava += "[1] ano chcem.\n";
+                send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+
+                if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+                    return true;
+                }
+                if(sprava[0] != '1') {
+                    return false;
+                }
+            }
+        }
+
+        return false;
     }
 
 };
