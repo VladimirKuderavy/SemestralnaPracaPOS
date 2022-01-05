@@ -77,6 +77,8 @@ private:
             std::string heslo = sprava;
             pouzivatel = data->prihlas(&meno, &heslo, socket);
 
+
+
             if(pouzivatel == nullptr) {
                 stringSprava = "Zadali ste zle pouzivatelske meno alebo heslo, chcete skusit znova [1 = ano]?: \n";
                 send(*socket, stringSprava.c_str(), stringSprava.size(), 0);

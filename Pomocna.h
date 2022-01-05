@@ -7,6 +7,10 @@
 class PomocnaTrieda {
 public:
 
+    //tu to mozes dat podla socketu
+    //ze najde v datach pouzivatela podla socketu ktory sem prichadza
+    //a ak doslo k problemu tak ho odtial vyhodi
+
     static int prijmiSpravu(char* sprava, int* socket) {
         memset(sprava, 0, 4096);
 

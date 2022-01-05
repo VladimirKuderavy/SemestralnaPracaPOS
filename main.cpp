@@ -10,7 +10,11 @@
 #include <pthread.h>
 #include "Data.h"
 #include "Prihlasenie.h"
+
+#include "Moznosti.h"
 #include "Konstanty.h"
+
+
 
 typedef struct dataACisloPortu {
     int cislo;
@@ -107,7 +111,12 @@ void* vlaknoFunkcia(void* param) {
     char  buf[4096];
 
 
-    Prihlasenie::prihlasenie(data,&clientSocket );
+    Pouzivatel* pouzivatel = Prihlasenie::prihlasenie(data,&clientSocket );
+
+    std::cout << *pouzivatel->getMeno() << " " << std::to_string(clientSocket) ;
+
+    Moznosti::vyberSiMoznost(pouzivatel, data, &clientSocket);
+
     /*
     while(true) {
         //ak sa niekto prihlasi a odpoji sa, tak ho treba zmazat z prihlasenych
@@ -154,11 +163,44 @@ void* vlaknoFunkcia(void* param) {
 }
 
 
+void* funkciaPosielacSprav(void* parData) {
+    Data* data = (Data*) parData;
+
+    while(true) {
+
+        pthread_mutex_lock(data->getMutexSpravy());
+        while(data->getSpravy()->size() == 0) {
+            pthread_cond_wait(data->getCondSpravy(), data->getMutexSpravy());
+        }
+        Sprava* sprava = (*data->getSpravy())[data->getSpravy()->size()-1];
+        data->getSpravy()->pop_back();
+        pthread_mutex_unlock(data->getMutexSpravy());
+
+        std::cout << "Vlakno bezi";
+
+        data->odosliSpravuCezSocket(sprava->getAdresat(), sprava->getObsah());
+
+
+        delete sprava;
+    }
+
+
+    return NULL;
+}
+
 
 
 int main() {
 
-    Data* data = new Data();
+
+    pthread_mutex_t mutexSpravy;
+    pthread_cond_t pdmSpravy;
+
+    pthread_mutex_init(&mutexSpravy, NULL);
+    pthread_cond_init(&pdmSpravy, NULL);
+
+    Data* data = new Data(&mutexSpravy, &pdmSpravy);
+
 
     DATAACISLOKPORTU dataacislokportu[POCET_KLIENTOV];
     for(int i = 0; i < POCET_KLIENTOV; i++) {
@@ -167,6 +209,9 @@ int main() {
     }
 
     pthread_t vlakna[POCET_KLIENTOV];
+    pthread_t pocuvac;
+
+    pthread_create(&pocuvac, NULL, &funkciaPosielacSprav, data);
 
 
     for(int i = 0; i < POCET_KLIENTOV; i++) {
@@ -176,6 +221,16 @@ int main() {
     for(int i = 0; i < POCET_KLIENTOV; i++) {
         pthread_join(vlakna[i], NULL);
     }
+
+
+    pthread_join(pocuvac, NULL);
+
+    pthread_cond_destroy(&pdmSpravy);
+    pthread_mutex_destroy(&mutexSpravy);
+
+
+
+
 
     delete data;
     return 0;

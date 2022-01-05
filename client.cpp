@@ -8,7 +8,9 @@
 #include <string.h>
 #include <functional>
 #include <pthread.h>
+
 #include "Konstanty.h"
+
 
 void* vlaknoZobrazovacFunkcia(void* data) {
     int* sock = (int*) data;
