@@ -67,10 +67,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /tmp/tmp.7qaIHHkNAh
+CMAKE_SOURCE_DIR = /tmp/tmp.kZl0Hzqpzl
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /tmp/tmp.7qaIHHkNAh/cmake-build-debug
+CMAKE_BINARY_DIR = /tmp/tmp.kZl0Hzqpzl/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -99,9 +99,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.7qaIHHkNAh/cmake-build-debug/CMakeFiles /tmp/tmp.7qaIHHkNAh/cmake-build-debug//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.kZl0Hzqpzl/cmake-build-debug/CMakeFiles /tmp/tmp.kZl0Hzqpzl/cmake-build-debug//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.7qaIHHkNAh/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.kZl0Hzqpzl/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -441,32 +441,32 @@ client.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.s
 .PHONY : client.cpp.s
 
-main.o: main.cpp.o
+server.o: server.cpp.o
 
-.PHONY : main.o
+.PHONY : server.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main.cpp.o
-.PHONY : main.cpp.o
+server.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.cpp.o
+.PHONY : server.cpp.o
 
-main.i: main.cpp.i
+server.i: server.cpp.i
 
-.PHONY : main.i
+.PHONY : server.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main.cpp.i
-.PHONY : main.cpp.i
+server.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.cpp.i
+.PHONY : server.cpp.i
 
-main.s: main.cpp.s
+server.s: server.cpp.s
 
-.PHONY : main.s
+.PHONY : server.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main.cpp.s
-.PHONY : main.cpp.s
+server.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/server.cpp.s
+.PHONY : server.cpp.s
 
 # Help Target
 help:
@@ -509,9 +509,9 @@ help:
 	@echo "... client.o"
 	@echo "... client.i"
 	@echo "... client.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... server.o"
+	@echo "... server.i"
+	@echo "... server.s"
 .PHONY : help
 
 

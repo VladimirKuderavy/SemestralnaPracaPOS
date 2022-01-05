@@ -109,10 +109,10 @@ public:
                 prijal = false;
             }
             if(data->spracujZiadostOPriatelstvo(pouzivatel, index, prijal)) {
-                stringSprava+= "Akcia prebehla uspesne\n";
+                stringSprava = "Akcia prebehla uspesne\n";
                 send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
             } else {
-                stringSprava+= "Zadali ste zly index\n";
+                stringSprava = "Zadali ste zly index\n";
                 send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
             }
         }

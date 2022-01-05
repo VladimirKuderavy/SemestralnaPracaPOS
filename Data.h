@@ -92,23 +92,37 @@ public:
 
 
 
+    bool posliSpravu(std::string& adresat, std::string obsahSpravy) {
+        pthread_mutex_lock(this->mutexSpravy);
+        this->spravy.push_back(new Sprava(adresat, obsahSpravy));
+        pthread_mutex_unlock(this->mutexSpravy);
+        pthread_cond_signal(this->spravyPlus);
+        return true;
+    }
+
     bool posliSpravu(Pouzivatel* pouzivatel, int indexKonverzacie, std::string& obsahSpravy) {
         //prejde vsetkych pouzivatelov danej konverzacie, pre kazdeho vytvori spravu a odosle ju
         if(pouzivatel->getKonverzacie()->size() <= indexKonverzacie ) {
             return false;
         }
 
-        obsahSpravy+= "\nodoslana pouzivatelom: " + *pouzivatel->getMeno();
+
 
         Konverzacia* konverzacia = (*pouzivatel->getKonverzacie())[indexKonverzacie];
+
+        std::string hlavickaSpravy = "Nova sprava: " ;
+        hlavickaSpravy+= "Od pouzivatela: " + *pouzivatel->getMeno() + "\n";
+        hlavickaSpravy+= "v konverzacii: " + *konverzacia->getNazov() + "\n";
+
+        hlavickaSpravy+= obsahSpravy;
+        obsahSpravy = hlavickaSpravy;
 
         for(int i = 0; i < konverzacia->getZoznamUcastnikov()->size(); i++) {
             std::string adresat = (*konverzacia->getZoznamUcastnikov())[i];
             if(adresat != *pouzivatel->getMeno()) {
-                pthread_mutex_lock(this->mutexSpravy);
-                this->spravy.push_back(new Sprava(adresat, obsahSpravy));
-                pthread_mutex_unlock(this->mutexSpravy);
-                pthread_cond_signal(this->spravyPlus);
+
+                //TODO kontrola ci ho ma odosielatel vo svojich priateloch, ak nie, tak to nieco vrati
+                posliSpravu(adresat, obsahSpravy);
                 std::cout << "pridal som spravu do pola a zavolal pthread cond\n";
             }
         }
@@ -217,16 +231,26 @@ public:
 
         }
 
-        //TODO poslanie spravy tom ze bola odoslana
+        //poslanie spravy tom ze bola odoslana
+        std::string obsahSpravy = "Nova ziadost o priatelstvo od pouzivatela: " + *odoslalZiadost->getMeno();
+        this->posliSpravu(menoKomuOdoslal, obsahSpravy);
+
         posliTomutoIterator->second->pridajNovuZiadost(odoslalZiadost);
         return true;
     }
 
+
+    /*
     void posliOdobratieZPriatelov(Pouzivatel* odoslalZiadost, Pouzivatel* chceOdobratTohto) {
-        //TODO poslanie spravy uzivatelovi -> chce odobrat tohto
+        //poslanie spravy uzivatelovi -> chce odobrat tohto
+        std::string obsahSpravy = "Uzivatel " + *odoslalZiadost->getMeno() + "si Vas odobral zo svojich priatelov\n";
+        this->posliSpravu(*chceOdobratTohto->getMeno(), obsahSpravy);
+
+
+
         odoberZPriatelov(odoslalZiadost, chceOdobratTohto);
 
-    }
+    }*/
 
     std::string dajZoznamZiadostiOPriatelstvo(Pouzivatel* pouzivatel) {
         std::string vrat = "";
@@ -245,15 +269,22 @@ public:
         if(pouzivatel->getZiadostiOPriatelstvo()->size() <= index) {
             return false;
         }
+
+        Pouzivatel* pridajTohto = pouzivatel->vymazZoZiadostiOPriatelstvo(index);
+
         if(prijal) {
-            Pouzivatel* pridajTohto = pouzivatel->vymazZoZiadostiOPriatelstvo(index);
-            //TODO posli spravu ze prial
+
+            //posli spravu ze prial
+            std::string obsahSpravy = "Pouzivatel " + *pouzivatel->getMeno() + " prial Vasu ziadost o priatelstvo.\n";
+            this->posliSpravu(*pridajTohto->getMeno(), obsahSpravy);
 
             pridajDoPriatelov(pouzivatel, pridajTohto);
 
         } else {
-            //TODO posli spravu ze neprial
-            pouzivatel->vymazZoZiadostiOPriatelstvo(index);
+            //posli spravu ze neprial
+            std::string obsahSpravy = "Pouzivatel " + *pouzivatel->getMeno() + " odmietol Vasu ziadost o priatelstvo.\n";
+            this->posliSpravu(*pridajTohto->getMeno(), obsahSpravy);
+
 
         }
         return true;
@@ -286,7 +317,10 @@ public:
         }
 
         Pouzivatel* odoberTohto = (*pouzivatel->getPriatelia())[index];
-        //TODO posli spravu ze odobral
+        //posli spravu ze odobral
+        std::string obsahSpravy = "Uzivatel " + *pouzivatel->getMeno() + " si Vas odobral zo svojich priatelov\n";
+        this->posliSpravu(*odoberTohto->getMeno(), obsahSpravy);
+
 
         this->odoberZPriatelov(pouzivatel, odoberTohto);
 
