@@ -10,21 +10,16 @@
 #include <pthread.h>
 #include "Data.h"
 #include "Prihlasenie.h"
-#include "Moznosti.h"
-#define PORT 3531
 
-#define POCET_KLIENTOV 2
+#include "Moznosti.h"
+#include "Konstanty.h"
+
+
 
 typedef struct dataACisloPortu {
     int cislo;
     Data* data;
 } DATAACISLOKPORTU;
-
-
-
-
-
-
 
 void* vlaknoFunkcia(void* param) {
     DATAACISLOKPORTU* dataacislokportu = (DATAACISLOKPORTU *) param;
@@ -197,6 +192,7 @@ void* funkciaPosielacSprav(void* parData) {
 
 int main() {
 
+
     pthread_mutex_t mutexSpravy;
     pthread_cond_t pdmSpravy;
 
@@ -205,14 +201,12 @@ int main() {
 
     Data* data = new Data(&mutexSpravy, &pdmSpravy);
 
+
     DATAACISLOKPORTU dataacislokportu[POCET_KLIENTOV];
     for(int i = 0; i < POCET_KLIENTOV; i++) {
         dataacislokportu[i].data = data;
         dataacislokportu[i].cislo = i;
     }
-
-
-
 
     pthread_t vlakna[POCET_KLIENTOV];
     pthread_t pocuvac;
@@ -228,10 +222,12 @@ int main() {
         pthread_join(vlakna[i], NULL);
     }
 
+
     pthread_join(pocuvac, NULL);
 
     pthread_cond_destroy(&pdmSpravy);
     pthread_mutex_destroy(&mutexSpravy);
+
 
 
 
