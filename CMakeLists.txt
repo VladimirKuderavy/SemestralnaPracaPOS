@@ -9,7 +9,6 @@ add_executable(server main.cpp Pouzivatel.h Pouzivatel.cpp Data.h Data.cpp Prihl
 add_executable(client client.cpp Konstanty.h)
 add_executable(client2 client.cpp Konstanty.h)
 
-
 target_link_libraries(server pthread)
 target_link_libraries(client pthread)
 target_link_libraries(client2 pthread)

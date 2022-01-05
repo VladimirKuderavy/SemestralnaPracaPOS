@@ -6,14 +6,12 @@
 #include "Pouzivatel.h"
 #include "Konverzacia.h"
 #include "pthread.h"
-
 #include <sys/socket.h>
 #include <iostream>
-
-
-
-
+#include <unordered_map>
 #include "Sprava.h"
+#include <string>
+
 class Prihlaseny {
 private:
     Pouzivatel* pouzivatel;
@@ -34,7 +32,8 @@ public:
 
 class Data {
 private:
-    std::vector<Pouzivatel*> pouzivatelia;
+    //std::vector<Pouzivatel*> pouzivatelia;
+    std::unordered_map<std::string, Pouzivatel*> pouzivatelia;
     std::vector<Prihlaseny*> prihlaseni;
     std::vector<Konverzacia*> konverzacie;
 
@@ -55,21 +54,22 @@ public:
 
         std::string meno = "Andrej";
         std::string priezvisko = "123";
-        Pouzivatel* pouzivatel = new Pouzivatel(1, meno, priezvisko);
-        pouzivatelia.push_back(pouzivatel);
+        Pouzivatel* pouzivatel = new Pouzivatel(meno, priezvisko);
+        pouzivatelia.insert({*pouzivatel->getMeno(), pouzivatel});
 
         meno = "Vladimir";
         priezvisko = "123";
-        pouzivatel = new Pouzivatel(1, meno, priezvisko);
-        pouzivatelia.push_back(pouzivatel);
+        pouzivatel = new Pouzivatel(meno, priezvisko);
+        pouzivatelia.insert({*pouzivatel->getMeno(), pouzivatel});
     }
     ~Data() {
         for(int i = 0; i < prihlaseni.size(); i++) {
             delete prihlaseni[i];
         }
-        for(int i = 0; i < pouzivatelia.size(); i++) {
-            delete pouzivatelia[i];
+        for (auto pouzivatel : this->pouzivatelia) {
+            delete pouzivatel.second;
         }
+
         for(int i = 0; i < konverzacie.size(); i++) {
             delete konverzacie[i];
         }
@@ -137,22 +137,27 @@ public:
 
     Pouzivatel* prihlas(std::string* meno, std::string* heslo, int* socket) {
 
-        for(int i = 0; i < pouzivatelia.size(); i++) {
-            if(*pouzivatelia[i]->getMeno() == *meno) {
-                if(pouzivatelia[i]->jeDobreHeslo(heslo)) {
-                    prihlaseni.push_back(new Prihlaseny(pouzivatelia[i], socket));
-                    return pouzivatelia[i];
-                }
+        auto pouzivatelIterator = this->pouzivatelia.find(*meno);
+
+        if (pouzivatelIterator != this->pouzivatelia.end()) {
+            if(pouzivatelIterator->second->jeDobreHeslo(heslo)) {
+                prihlaseni.push_back(new Prihlaseny(pouzivatelIterator->second, socket));
+                return pouzivatelIterator->second;
             }
         }
+
         return nullptr;
     }
 
     void vytvorKonverzaciu(Pouzivatel* pouzivatel, int& indexKonverzacie, std::string& nazovKonverzacie) {
         Konverzacia* konverzacia = new Konverzacia(nazovKonverzacie);
+
         konverzacia->pridajUcastnika(*pouzivatel->getMeno());
+
         pouzivatel->getKonverzacie()->push_back(konverzacia);
+
         indexKonverzacie = pouzivatel->getKonverzacie()->size() -1;
+
         this->konverzacie.push_back(konverzacia);
 
     }
@@ -161,9 +166,11 @@ public:
         if(pouzivatel->getKonverzacie()->size() <= indexKonverzacie) {
             return false;
         }
+
         if(pouzivatel->getPriatelia()->size() <= indexVPoliJehoPriatelov) {
             return false;
         }
+
         Pouzivatel* pridajTohto = (*pouzivatel->getPriatelia())[indexVPoliJehoPriatelov];
         Konverzacia* konverzacia = (*pouzivatel->getKonverzacie())[indexKonverzacie];
 
@@ -172,42 +179,46 @@ public:
                 return false;
             }
         }
+
         pridajTohto->getKonverzacie()->push_back(konverzacia);
         (*pouzivatel->getKonverzacie())[indexKonverzacie]->pridajUcastnika(*(pridajTohto->getMeno()));
+
         return true;
     }
 
     void registruj(std::string* meno, std::string* heslo) {
-        Pouzivatel* pouzivatel = new Pouzivatel(pouzivatelia[pouzivatelia.size()-1]->getId()+1, *meno, *heslo);
-        pouzivatelia.push_back(pouzivatel);
+        Pouzivatel* pouzivatel = new Pouzivatel(*meno, *heslo);
+        pouzivatelia.insert({*pouzivatel->getMeno(), pouzivatel});
     }
 
-    bool jeMenoUnikatne(std::string meno) {
-        for(int i = 0; i < pouzivatelia.size(); i++) {
-            if(*pouzivatelia[i]->getMeno() == meno) {
-                return false;
-            }
+    bool jeMenoUnikatne(std::string& meno) {
+        auto pouzivatelIterator = this->pouzivatelia.find(meno);
+
+        if (pouzivatelIterator != this->pouzivatelia.end()) {
+            return false;
         }
+
         return true;
     }
 
     //true ak sa podarilo, false ak sa nepodarilo
     bool posliZiadostOPriatelstvo(Pouzivatel* odoslalZiadost, std::string menoKomuOdoslal) {
-        Pouzivatel* posliTomuto =nullptr;
-        for(int i = 0; i < pouzivatelia.size(); i++) {
-            if(*pouzivatelia[i]->getMeno() == menoKomuOdoslal) {
-                posliTomuto = pouzivatelia[i];
-            }
-        }
-        if(posliTomuto == nullptr) {
-            return false;
-        }
-        if(posliTomuto->jeVZiadostiach(odoslalZiadost) || posliTomuto->uzJeVPriateloch(odoslalZiadost) ) {
+
+        auto posliTomutoIterator = this->pouzivatelia.find(menoKomuOdoslal);
+
+        if (posliTomutoIterator == this->pouzivatelia.end()) {
             return false;
         }
 
+        if(posliTomutoIterator->second->jeVZiadostiach(odoslalZiadost)
+            || posliTomutoIterator->second->uzJeVPriateloch(odoslalZiadost) ) {
+
+            return false;
+
+        }
+
         //TODO poslanie spravy tom ze bola odoslana
-        posliTomuto->pridajNovuZiadost(odoslalZiadost);
+        posliTomutoIterator->second->pridajNovuZiadost(odoslalZiadost);
         return true;
     }
 

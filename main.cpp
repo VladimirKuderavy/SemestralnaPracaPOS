@@ -157,8 +157,6 @@ void* vlaknoFunkcia(void* param) {
 
     close(clientSocket);
 
-
-
     return NULL;
 }
 

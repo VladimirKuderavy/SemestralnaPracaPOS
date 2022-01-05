@@ -6,21 +6,16 @@
 // Created by Andrej on 3. 1. 2022.
 //
 
-
-
 class Pouzivatel {
 private:
-    int id;
     std::string pouzivatelskeMeno;
     std::string heslo;
     std::vector<Pouzivatel*> priatelia;
-
     std::vector<Pouzivatel*> ziadostiOPriatelstvo;
     std::vector<Konverzacia*> konverzacie;
 
 public:
-    Pouzivatel(int id, std::string& meno, std::string& heslo) {
-        this->id = id;
+    Pouzivatel(std::string& meno, std::string& heslo) {
         this->pouzivatelskeMeno = meno;
         this->heslo = heslo;
     }
@@ -45,9 +40,6 @@ public:
     }
     bool jeDobreHeslo(std::string* parHeslo) {
         return *parHeslo == this->heslo;
-    }
-    int getId() {
-        return this->id;
     }
 
 
