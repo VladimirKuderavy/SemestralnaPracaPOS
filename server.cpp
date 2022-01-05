@@ -133,6 +133,9 @@ void* vlaknoFunkcia(void* param) {
         bool odpojiloHo = false;
         while(!odpojiloHo) {
         Pouzivatel *pouzivatel = Prihlasenie::prihlasenie(data, &clientSocket);
+        if(pouzivatel == nullptr) {
+            break;
+        }
 
         std::cout << *pouzivatel->getMeno() << " " << std::to_string(clientSocket);
 
