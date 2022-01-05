@@ -1,4 +1,5 @@
 /tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles/edit_cache.dir
+/tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles/client2.dir
 /tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles/client.dir
 /tmp/tmp.oWSNRz4JXy/cmake-build-debug/CMakeFiles/server.dir

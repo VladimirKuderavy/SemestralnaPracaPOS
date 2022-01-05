@@ -8,7 +8,7 @@
 #include <string.h>
 #include <functional>
 #include <pthread.h>
-#define PORT 6969
+#define PORT 3531
 
 void* vlaknoZobrazovacFunkcia(void* data) {
     int* sock = (int*) data;

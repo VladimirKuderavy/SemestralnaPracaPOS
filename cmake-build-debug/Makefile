@@ -130,6 +130,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named client2
+
+# Build rule for target.
+client2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 client2
+.PHONY : client2
+
+# fast build rule for target.
+client2/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client2.dir/build.make CMakeFiles/client2.dir/build
+.PHONY : client2/fast
+
+#=============================================================================
 # Target rules for targets named client
 
 # Build rule for target.
@@ -181,6 +194,60 @@ Data.s: Data.cpp.s
 Data.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Data.cpp.s
 .PHONY : Data.cpp.s
+
+Konverzacia.o: Konverzacia.cpp.o
+
+.PHONY : Konverzacia.o
+
+# target to build an object file
+Konverzacia.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Konverzacia.cpp.o
+.PHONY : Konverzacia.cpp.o
+
+Konverzacia.i: Konverzacia.cpp.i
+
+.PHONY : Konverzacia.i
+
+# target to preprocess a source file
+Konverzacia.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Konverzacia.cpp.i
+.PHONY : Konverzacia.cpp.i
+
+Konverzacia.s: Konverzacia.cpp.s
+
+.PHONY : Konverzacia.s
+
+# target to generate assembly for a file
+Konverzacia.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Konverzacia.cpp.s
+.PHONY : Konverzacia.cpp.s
+
+Moznosti.o: Moznosti.cpp.o
+
+.PHONY : Moznosti.o
+
+# target to build an object file
+Moznosti.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Moznosti.cpp.o
+.PHONY : Moznosti.cpp.o
+
+Moznosti.i: Moznosti.cpp.i
+
+.PHONY : Moznosti.i
+
+# target to preprocess a source file
+Moznosti.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Moznosti.cpp.i
+.PHONY : Moznosti.cpp.i
+
+Moznosti.s: Moznosti.cpp.s
+
+.PHONY : Moznosti.s
+
+# target to generate assembly for a file
+Moznosti.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Moznosti.cpp.s
+.PHONY : Moznosti.cpp.s
 
 Pomocna.o: Pomocna.cpp.o
 
@@ -263,12 +330,94 @@ Prihlasenie.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Prihlasenie.cpp.s
 .PHONY : Prihlasenie.cpp.s
 
+Sprava.o: Sprava.cpp.o
+
+.PHONY : Sprava.o
+
+# target to build an object file
+Sprava.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Sprava.cpp.o
+.PHONY : Sprava.cpp.o
+
+Sprava.i: Sprava.cpp.i
+
+.PHONY : Sprava.i
+
+# target to preprocess a source file
+Sprava.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Sprava.cpp.i
+.PHONY : Sprava.cpp.i
+
+Sprava.s: Sprava.cpp.s
+
+.PHONY : Sprava.s
+
+# target to generate assembly for a file
+Sprava.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Sprava.cpp.s
+.PHONY : Sprava.cpp.s
+
+SpravaKonverzacii.o: SpravaKonverzacii.cpp.o
+
+.PHONY : SpravaKonverzacii.o
+
+# target to build an object file
+SpravaKonverzacii.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/SpravaKonverzacii.cpp.o
+.PHONY : SpravaKonverzacii.cpp.o
+
+SpravaKonverzacii.i: SpravaKonverzacii.cpp.i
+
+.PHONY : SpravaKonverzacii.i
+
+# target to preprocess a source file
+SpravaKonverzacii.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/SpravaKonverzacii.cpp.i
+.PHONY : SpravaKonverzacii.cpp.i
+
+SpravaKonverzacii.s: SpravaKonverzacii.cpp.s
+
+.PHONY : SpravaKonverzacii.s
+
+# target to generate assembly for a file
+SpravaKonverzacii.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/SpravaKonverzacii.cpp.s
+.PHONY : SpravaKonverzacii.cpp.s
+
+SpravaPriatelstiev.o: SpravaPriatelstiev.cpp.o
+
+.PHONY : SpravaPriatelstiev.o
+
+# target to build an object file
+SpravaPriatelstiev.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/SpravaPriatelstiev.cpp.o
+.PHONY : SpravaPriatelstiev.cpp.o
+
+SpravaPriatelstiev.i: SpravaPriatelstiev.cpp.i
+
+.PHONY : SpravaPriatelstiev.i
+
+# target to preprocess a source file
+SpravaPriatelstiev.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/SpravaPriatelstiev.cpp.i
+.PHONY : SpravaPriatelstiev.cpp.i
+
+SpravaPriatelstiev.s: SpravaPriatelstiev.cpp.s
+
+.PHONY : SpravaPriatelstiev.s
+
+# target to generate assembly for a file
+SpravaPriatelstiev.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/SpravaPriatelstiev.cpp.s
+.PHONY : SpravaPriatelstiev.cpp.s
+
 client.o: client.cpp.o
 
 .PHONY : client.o
 
 # target to build an object file
 client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client2.dir/build.make CMakeFiles/client2.dir/client.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.o
 .PHONY : client.cpp.o
 
@@ -278,6 +427,7 @@ client.i: client.cpp.i
 
 # target to preprocess a source file
 client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client2.dir/build.make CMakeFiles/client2.dir/client.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.i
 .PHONY : client.cpp.i
 
@@ -287,6 +437,7 @@ client.s: client.cpp.s
 
 # target to generate assembly for a file
 client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client2.dir/build.make CMakeFiles/client2.dir/client.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.s
 .PHONY : client.cpp.s
 
@@ -326,10 +477,17 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... client"
+	@echo "... client2"
 	@echo "... server"
 	@echo "... Data.o"
 	@echo "... Data.i"
 	@echo "... Data.s"
+	@echo "... Konverzacia.o"
+	@echo "... Konverzacia.i"
+	@echo "... Konverzacia.s"
+	@echo "... Moznosti.o"
+	@echo "... Moznosti.i"
+	@echo "... Moznosti.s"
 	@echo "... Pomocna.o"
 	@echo "... Pomocna.i"
 	@echo "... Pomocna.s"
@@ -339,6 +497,15 @@ help:
 	@echo "... Prihlasenie.o"
 	@echo "... Prihlasenie.i"
 	@echo "... Prihlasenie.s"
+	@echo "... Sprava.o"
+	@echo "... Sprava.i"
+	@echo "... Sprava.s"
+	@echo "... SpravaKonverzacii.o"
+	@echo "... SpravaKonverzacii.i"
+	@echo "... SpravaKonverzacii.s"
+	@echo "... SpravaPriatelstiev.o"
+	@echo "... SpravaPriatelstiev.i"
+	@echo "... SpravaPriatelstiev.s"
 	@echo "... client.o"
 	@echo "... client.i"
 	@echo "... client.s"

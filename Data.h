@@ -12,6 +12,8 @@
 
 
 
+
+#include "Sprava.h"
 class Prihlaseny {
 private:
     Pouzivatel* pouzivatel;
@@ -39,9 +41,18 @@ private:
 
 
 
+    //kriticka sekcia so spravou
+    std::vector<Sprava*> spravy;
+
+    pthread_mutex_t* mutexSpravy;
+    pthread_cond_t* spravyPlus;
 public:
 
-    Data () {
+
+    Data (pthread_mutex_t* mutexSpravy, pthread_cond_t* spravyPlus) {
+        this->mutexSpravy = mutexSpravy;
+        this->spravyPlus = spravyPlus;
+
         std::string meno = "Andrej";
         std::string priezvisko = "123";
         Pouzivatel* pouzivatel = new Pouzivatel(1, meno, priezvisko);
@@ -51,6 +62,73 @@ public:
         priezvisko = "123";
         pouzivatel = new Pouzivatel(1, meno, priezvisko);
         pouzivatelia.push_back(pouzivatel);
+    }
+    ~Data() {
+        for(int i = 0; i < prihlaseni.size(); i++) {
+            delete prihlaseni[i];
+        }
+        for(int i = 0; i < pouzivatelia.size(); i++) {
+            delete pouzivatelia[i];
+        }
+        for(int i = 0; i < konverzacie.size(); i++) {
+            delete konverzacie[i];
+        }
+    }
+    pthread_mutex_t* getMutexSpravy() {
+        return this->mutexSpravy;
+    }
+
+    pthread_cond_t* getCondSpravy() {
+        return this->spravyPlus;
+    }
+    std::vector<Sprava*>* getSpravy() {
+        return &this->spravy;
+    }
+
+    //zobrazi zoznam konverzacii daneho pouzivatela... vytvorit novu konverzaciu
+    //vytvorit novu -> zada nazov konverzacie ->vytvori sa prazdna konverzacia-> moznost pridat pridatelov
+
+    //              ->zada v ktorej konv chce pisat ->vypyta obsah spravy ->potvrdit
+
+
+
+    bool posliSpravu(Pouzivatel* pouzivatel, int indexKonverzacie, std::string& obsahSpravy) {
+        //prejde vsetkych pouzivatelov danej konverzacie, pre kazdeho vytvori spravu a odosle ju
+        if(pouzivatel->getKonverzacie()->size() <= indexKonverzacie ) {
+            return false;
+        }
+
+        Konverzacia* konverzacia = (*pouzivatel->getKonverzacie())[indexKonverzacie];
+
+        for(int i = 0; i < konverzacia->getZoznamUcastnikov()->size(); i++) {
+            std::string adresat = (*konverzacia->getZoznamUcastnikov())[i];
+            if(adresat != *pouzivatel->getMeno()) {
+                pthread_mutex_lock(this->mutexSpravy);
+                this->spravy.push_back(new Sprava(adresat, obsahSpravy));
+                pthread_mutex_unlock(this->mutexSpravy);
+                pthread_cond_signal(this->spravyPlus);
+                std::cout << "pridal som spravu do pola a zavolal pthread cond\n";
+            }
+        }
+
+
+        return true;
+    }
+
+    void odosliSpravuCezSocket(std::string menoUzivatela, std::string obsahSpravy) {
+        int socket = -1;
+        for(int i = 0; i < prihlaseni.size(); i++) {
+            if(*(prihlaseni[i]->getPouzivatel()->getMeno()) == menoUzivatela) {
+                socket = prihlaseni[i]->getSocket();
+            }
+        }
+        if(socket == -1) {
+            //TODO pridaj do zoznamu sprav ktore sa maju zobrazit uzivatelovi ked sa prihlasi
+        }
+        std::cout << "Odoslal som spravu\n";
+        std::cout << "Socket: " << std::to_string(socket);
+        send(socket, obsahSpravy.c_str(), obsahSpravy.size(), 0);
+
     }
 
 
