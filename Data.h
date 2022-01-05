@@ -98,6 +98,8 @@ public:
             return false;
         }
 
+        obsahSpravy+= "\nodoslana pouzivatelom: " + *pouzivatel->getMeno();
+
         Konverzacia* konverzacia = (*pouzivatel->getKonverzacie())[indexKonverzacie];
 
         for(int i = 0; i < konverzacia->getZoznamUcastnikov()->size(); i++) {
