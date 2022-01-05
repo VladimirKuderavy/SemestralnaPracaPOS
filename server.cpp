@@ -22,6 +22,8 @@ typedef struct dataACisloPortu {
 } DATAACISLOKPORTU;
 
 void* vlaknoFunkcia(void* param) {
+
+
     DATAACISLOKPORTU* dataacislokportu = (DATAACISLOKPORTU *) param;
     Data* data = dataacislokportu->data;
     int plus = dataacislokportu->cislo;
@@ -32,6 +34,8 @@ void* vlaknoFunkcia(void* param) {
     //1. paraameter - komunikacna domena - AF_INET = sockety umožňujúce komunikáciu pomocou protokolov založených na IPv4
     //2. parameter - typ socketu - SOCK_STREAM = spoľahlivá, obojsmerná, spojovo-orientovaná služba na prenos zoradenej sekvencie bajtov.
     //3. protokol - mohol by specifikovat dalsie vlastnosti socketu
+
+
 
     int listening = socket(AF_INET, SOCK_STREAM, 0);
     if(listening == -1) {
@@ -58,105 +62,129 @@ void* vlaknoFunkcia(void* param) {
         std::cerr << "Nemozem nabindovat na IP /port";
         return NULL;
     }
-    //Aby mohol zacat prijimat spojenia od klientov, musi sa oznacit ako pasivny pomocou listen
-    //1. parametrom je socket, na ktorom chceme zacat prijimat spojenia od klientov
-    //2. parameter je dlzka fronty, kam sa budu zaradzovvat poziadavky o vytvorenie spojenia, ktore nie je mozne
-    //  okamzite obsluzit
-    if(listen(listening, SOMAXCONN) == -1) {
-        std:std::cerr << "Nemozem pocuvat";
-
-    }
 
 
-    sockaddr_in client;
-    socklen_t clientSize = sizeof(client);
-    char host[NI_MAXHOST];
-    char svc[NI_MAXSERV];
+        //Aby mohol zacat prijimat spojenia od klientov, musi sa oznacit ako pasivny pomocou listen
+        //1. parametrom je socket, na ktorom chceme zacat prijimat spojenia od klientov
+        //2. parameter je dlzka fronty, kam sa budu zaradzovvat poziadavky o vytvorenie spojenia, ktore nie je mozne
+        //  okamzite obsluzit
+        if(listen(listening, SOMAXCONN) == -1) {
+            std:std::cerr << "Nemozem pocuvat";
 
-    //cakanie a prijatie poziadavky na vytvorenie spojenia s klientom
-    //funkcia bude blokovat vykonavanie procesu az kym klient nepoziada o vytvorenie spojenia
-    //1. parameter - sockfd - platný deskriptor pasívneho socketu, s priradenou adresou.
-    //          Po úspešnom vytvorení spojenia funkcia accept do tejto inštancie
-    //          (ak to má v danej komunikačnej doméne význam) vyplní adresu klienta, ktorý požiadal o spojenie.
-    //2. parameter - addr - ukazovateľ na inštanciu štruktúry sockaddr
-    //3. parameter - addrlen - skutocna velkost instancie, na ktoru ukazuje param addr.
-    //                  odovzdava sa adresa premennej obsahujucej sizeof
-    int clientSocket = accept(listening, (sockaddr*)&client, &clientSize);
-
-    if(clientSocket == -1) {
-        std::cerr << "Problem s pripojenim klienta";
-        return NULL;
-    }
-
-    //Po úspešnom vytvorení spojenia vráti accept deskriptor socketu reprezentujúceho spojenie s konkrétnym klientom.
-    // V danom čase môže byť takýchto spojení vytvorených viacero súčasne a každé je identifikované vlastným deskriptorom.
-
-    //close the listening
-    close(listening);
+        }
 
 
-    memset(host, 0, NI_MAXHOST);
-    memset(svc, 0, NI_MAXSERV);
+        sockaddr_in client;
+        socklen_t clientSize = sizeof(client);
+        char host[NI_MAXHOST];
+        char svc[NI_MAXSERV];
 
-
-    int result = getnameinfo((sockaddr*)&client, sizeof(client), host, NI_MAXHOST, svc, NI_MAXSERV, 0);
-
-    if(result) {
-        std::cout << host << "connected on " << svc << std::endl;
-    }
-    else {
-        inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
-        std::cout << host << "conected on " << ntohs(client.sin_port) << std::endl;
-    }
-    char  buf[4096];
-
-
-    Pouzivatel* pouzivatel = Prihlasenie::prihlasenie(data,&clientSocket );
-
-    std::cout << *pouzivatel->getMeno() << " " << std::to_string(clientSocket) ;
-
-    Moznosti::vyberSiMoznost(pouzivatel, data, &clientSocket);
-
-    /*
-    while(true) {
-        //ak sa niekto prihlasi a odpoji sa, tak ho treba zmazat z prihlasenych
-        //vycistit bufer
+        //cakanie a prijatie poziadavky na vytvorenie spojenia s klientom
+        //funkcia bude blokovat vykonavanie procesu az kym klient nepoziada o vytvorenie spojenia
+        //1. parameter - sockfd - platný deskriptor pasívneho socketu, s priradenou adresou.
+        //          Po úspešnom vytvorení spojenia funkcia accept do tejto inštancie
+        //          (ak to má v danej komunikačnej doméne význam) vyplní adresu klienta, ktorý požiadal o spojenie.
+        //2. parameter - addr - ukazovateľ na inštanciu štruktúry sockaddr
+        //3. parameter - addrlen - skutocna velkost instancie, na ktoru ukazuje param addr.
+        //                  odovzdava sa adresa premennej obsahujucej sizeof
 
 
 
 
 
-        /*
-        memset(buf, 0, 4096);
-        int bytesRecv = recv(clientSocket, buf, 4096, 0);
+        int clientSocket = accept(listening, (sockaddr *) &client, &clientSize);
 
-        if(buf == "kkk") {
+        data->pridajOtvorenySocket(clientSocket);
+
+
+        //1 kilneme to spojenie manualne pri zabiti  toho vlakna
+        //2 bool premenna, ktora sa zastavi -> porty na ktorych su uzivatelia sa vypnu ked sa odhlasia
+            //porty na ktorych nie su sa vypnu, ked sa niekto pripoji
+
+        if (clientSocket == -1) {
+            std::cerr << "Problem s pripojenim klienta";
             return NULL;
         }
 
-        if(bytesRecv == -1) {
-            std::cerr << "Problem so spojenim";
-            break;
+        //Po úspešnom vytvorení spojenia vráti accept deskriptor socketu reprezentujúceho spojenie s konkrétnym klientom.
+        // V danom čase môže byť takýchto spojení vytvorených viacero súčasne a každé je identifikované vlastným deskriptorom.
+
+        //close the listening
+        close(listening);
+
+
+
+
+        memset(host, 0, NI_MAXHOST);
+        memset(svc, 0, NI_MAXSERV);
+
+
+        int result = getnameinfo((sockaddr *) &client, sizeof(client), host, NI_MAXHOST, svc, NI_MAXSERV, 0);
+
+        if (result) {
+            std::cout << host << "connected on " << svc << std::endl;
+        } else {
+            inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
+            std::cout << host << "conected on " << ntohs(client.sin_port) << std::endl;
         }
-        if(bytesRecv == 0) {
-            std::cout << "Klient sa odpojil" << "\n";
-            break;
+        char buf[4096];
+
+
+        bool odpojiloHo = false;
+        while(!odpojiloHo) {
+        Pouzivatel *pouzivatel = Prihlasenie::prihlasenie(data, &clientSocket);
+
+        std::cout << *pouzivatel->getMeno() << " " << std::to_string(clientSocket);
+
+        if(Moznosti::vyberSiMoznost(pouzivatel, data, &clientSocket)) {
+            odpojiloHo = true;
+        };
+
+        data->odhlasPouzivatela(pouzivatel);
+
+        /*
+        while(true) {
+            //ak sa niekto prihlasi a odpoji sa, tak ho treba zmazat z prihlasenych
+            //vycistit bufer
+
+
+
+
+
+            /*
+            memset(buf, 0, 4096);
+            int bytesRecv = recv(clientSocket, buf, 4096, 0);
+
+            if(buf == "kkk") {
+                return NULL;
+            }
+
+            if(bytesRecv == -1) {
+                std::cerr << "Problem so spojenim";
+                break;
+            }
+            if(bytesRecv == 0) {
+                std::cout << "Klient sa odpojil" << "\n";
+                break;
+            }
+
+            std::cout << "Received: " << std::string(buf, 0, bytesRecv) << std::endl;
+
+            std::string s = "nieco";
+
+
+            send(clientSocket, s.c_str(), s.size(), 0);
+
+
+
         }
-
-        std::cout << "Received: " << std::string(buf, 0, bytesRecv) << std::endl;
-
-        std::string s = "nieco";
-
-
-        send(clientSocket, s.c_str(), s.size(), 0);
+        */
 
 
 
+        //data->zatvorSocket(clientSocket);
     }
-    */
-
-    close(clientSocket);
-
+    data->zatvorSocket(clientSocket);
     return NULL;
 }
 
@@ -216,16 +244,35 @@ int main() {
         pthread_create(&vlakna[i], NULL, &vlaknoFunkcia, &dataacislokportu[i]);
     }
 
+    /*
     for(int i = 0; i < POCET_KLIENTOV; i++) {
         pthread_join(vlakna[i], NULL);
     }
+    */
 
 
-    pthread_join(pocuvac, NULL);
+    while(true) {
+        std::string koniec;
+        std::cout << "Pre ukoncenie servera zadajte koniec\n";
+        std::cin >> koniec;
+        if(koniec == "koniec") {
+            //TODO ulozenie do suboru
+
+            break;
+        }
+    }
+    for(int i = 0; i < POCET_KLIENTOV; i++) {
+        pthread_cancel(vlakna[i]);
+    }
+    pthread_cancel(pocuvac);
+
+
+    data->zatvorVsetkyOtvoreneSockety();
+
+    //pthread_join(pocuvac, NULL);
 
     pthread_cond_destroy(&pdmSpravy);
     pthread_mutex_destroy(&mutexSpravy);
-
 
 
 

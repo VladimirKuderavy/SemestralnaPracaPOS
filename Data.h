@@ -11,6 +11,7 @@
 #include <unordered_map>
 #include "Sprava.h"
 #include <string>
+#include "unistd.h"
 
 class Prihlaseny {
 private:
@@ -36,6 +37,8 @@ private:
     std::unordered_map<std::string, Pouzivatel*> pouzivatelia;
     std::vector<Prihlaseny*> prihlaseni;
     std::vector<Konverzacia*> konverzacie;
+
+    std::vector<int> otvoreneSockety;
 
 
 
@@ -74,6 +77,33 @@ public:
             delete konverzacie[i];
         }
     }
+
+    void pridajOtvorenySocket(int socket) {
+
+
+    }
+
+    void vymazOtvorenySocket(int socket) {
+        for(int i = 0; i < this->otvoreneSockety.size(); i++) {
+            if(otvoreneSockety[i] == socket) {
+                otvoreneSockety.erase(otvoreneSockety.begin() + i);
+                break;
+            }
+        }
+    }
+    void zatvorSocket(int socket) {
+        vymazOtvorenySocket(socket);
+        close(socket);
+    }
+    void zatvorVsetkyOtvoreneSockety() {
+        for(int i = 0; i < this->otvoreneSockety.size(); i++) {
+            close(this->otvoreneSockety[i]);
+        }
+    }
+
+
+
+
     pthread_mutex_t* getMutexSpravy() {
         return this->mutexSpravy;
     }
@@ -100,7 +130,7 @@ public:
         return true;
     }
 
-    bool posliSpravu(Pouzivatel* pouzivatel, int indexKonverzacie, std::string& obsahSpravy) {
+    bool posliSpravu(Pouzivatel* pouzivatel, int indexKonverzacie, std::string& obsahSpravy, std::string& zoznamKtorymSaNepodariloPoslat) {
         //prejde vsetkych pouzivatelov danej konverzacie, pre kazdeho vytvori spravu a odosle ju
         if(pouzivatel->getKonverzacie()->size() <= indexKonverzacie ) {
             return false;
@@ -120,10 +150,20 @@ public:
         for(int i = 0; i < konverzacia->getZoznamUcastnikov()->size(); i++) {
             std::string adresat = (*konverzacia->getZoznamUcastnikov())[i];
             if(adresat != *pouzivatel->getMeno()) {
+                //kontrola ci ho ma odosielatel vo svojich priateloch, ak nie, tak to nieco vrati
+                bool jeVPriateloch = false;
+                for(int j = 0; j < pouzivatel->getPriatelia()->size(); j++) {
+                    if(*(*pouzivatel->getPriatelia())[j]->getMeno() == adresat) {
+                        jeVPriateloch = true;
+                    }
+                }
+                if(jeVPriateloch) {
+                    posliSpravu(adresat, obsahSpravy);
+                    std::cout << "pridal som spravu do pola a zavolal pthread cond\n";
+                } else {
+                    zoznamKtorymSaNepodariloPoslat+= adresat + "\n";
+                }
 
-                //TODO kontrola ci ho ma odosielatel vo svojich priateloch, ak nie, tak to nieco vrati
-                posliSpravu(adresat, obsahSpravy);
-                std::cout << "pridal som spravu do pola a zavolal pthread cond\n";
             }
         }
 
@@ -311,20 +351,42 @@ public:
     }
 
     //vracia true ak prebehlo OK
-    bool spracujOdobratieZPriatelov(Pouzivatel* pouzivatel,int index) {
+    bool spracujOdobratieZPriatelov(Pouzivatel* pouzivatel,int index, std::string dovod = "") {
         if(pouzivatel->getPriatelia()->size() <= index) {
             return false;
         }
 
         Pouzivatel* odoberTohto = (*pouzivatel->getPriatelia())[index];
         //posli spravu ze odobral
-        std::string obsahSpravy = "Uzivatel " + *pouzivatel->getMeno() + " si Vas odobral zo svojich priatelov\n";
+        std::string obsahSpravy = "Uzivatel " + *pouzivatel->getMeno() + " si Vas odobral zo svojich priatelov " + dovod + "\n";
         this->posliSpravu(*odoberTohto->getMeno(), obsahSpravy);
 
 
         this->odoberZPriatelov(pouzivatel, odoberTohto);
 
         return true;
+    }
+
+
+    void odstranPouzivateloviVsetkychPriatelov(Pouzivatel* pouzivatel) {
+        int pocetNaOdobratie = pouzivatel->getPriatelia()->size();
+        for(int i = 0; i < pocetNaOdobratie; i++) {
+            spracujOdobratieZPriatelov(pouzivatel, 0, "z dovodu zrusenia uctu");
+        }
+    }
+    void odstranUcet(Pouzivatel* pouzivatel) {
+        pouzivatelia.erase(*pouzivatel->getMeno());
+        delete pouzivatel;
+    }
+
+
+    void odhlasPouzivatela(Pouzivatel* odhlasMna) {
+        for(int i = 0; i < this->prihlaseni.size(); i++) {
+            if(this->prihlaseni[i]->getPouzivatel() == odhlasMna) {
+               this->prihlaseni.erase(this->prihlaseni.begin() + i);
+               break;
+            }
+        }
     }
 
 

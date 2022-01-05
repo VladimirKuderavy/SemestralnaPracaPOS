@@ -41,10 +41,19 @@ public:
             }
             std::string obsahSpravy = sprava;
 
+            std::string tymtoSaNepodariloOdoslat = "";
 
-            if(data->posliSpravu(pouzivatel, index, obsahSpravy)) {
-                stringSprava = "Sprava odoslana\n";
-                send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+            if(data->posliSpravu(pouzivatel, index, obsahSpravy, tymtoSaNepodariloOdoslat)) {
+                if(tymtoSaNepodariloOdoslat != "") {
+                    stringSprava = "Tymto ucastnikom sa nepodarilo spravu odoslat, lebo ich nemate v priateloch:\n";
+                    stringSprava+= tymtoSaNepodariloOdoslat; + "\n";
+                    stringSprava+= "Ostatnym ucastnikom konverzacie sa sprava poslala\n";
+                    send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+                } else {
+                    stringSprava = "Sprava odoslana\n";
+                    send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+                }
+
             } else {
                 stringSprava = "Zadali ste zly index\n";
                 send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
@@ -52,7 +61,16 @@ public:
         }
         return false;
 
+        //FINISH nasej semky:
+        // HOTOVO odhlasenie
+        // HOTOVO zrusenie uctu - vsetkym zrusi priatelstvo
+            // HHOTOVO vymaze pouzivatela
 
+       // mutexy
+       // HOTOVO - beh servera - aby sa dal ukoncit korektne a
+       // pamat aby bola cista po vypnuti
+
+        //ukladanie do suboru
 
     }
 
