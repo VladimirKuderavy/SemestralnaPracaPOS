@@ -10,20 +10,12 @@
 #include <pthread.h>
 #include "Data.h"
 #include "Prihlasenie.h"
-#define PORT 6969
-
-#define POCET_KLIENTOV 2
+#include "Konstanty.h"
 
 typedef struct dataACisloPortu {
     int cislo;
     Data* data;
 } DATAACISLOKPORTU;
-
-
-
-
-
-
 
 void* vlaknoFunkcia(void* param) {
     DATAACISLOKPORTU* dataacislokportu = (DATAACISLOKPORTU *) param;
@@ -166,8 +158,6 @@ void* vlaknoFunkcia(void* param) {
 
 int main() {
 
-
-
     Data* data = new Data();
 
     DATAACISLOKPORTU dataacislokportu[POCET_KLIENTOV];
@@ -175,9 +165,6 @@ int main() {
         dataacislokportu[i].data = data;
         dataacislokportu[i].cislo = i;
     }
-
-
-
 
     pthread_t vlakna[POCET_KLIENTOV];
 
@@ -189,10 +176,6 @@ int main() {
     for(int i = 0; i < POCET_KLIENTOV; i++) {
         pthread_join(vlakna[i], NULL);
     }
-
-
-
-
 
     delete data;
     return 0;

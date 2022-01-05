@@ -8,7 +8,7 @@
 #include <string.h>
 #include <functional>
 #include <pthread.h>
-#define PORT 6969
+#include "Konstanty.h"
 
 void* vlaknoZobrazovacFunkcia(void* data) {
     int* sock = (int*) data;
@@ -20,14 +20,11 @@ void* vlaknoZobrazovacFunkcia(void* data) {
         if(bytesReceived == 0) {
             break;
         }
-        std::cout << "SERVER: " << std::string(buff, bytesReceived) << "\n";
+        std::cout << ">: " << std::string(buff, bytesReceived) << "\n";
 
         memset(buff, 0, 4096);
 
     }
-
-
-
 
     return NULL;
 }
@@ -64,11 +61,6 @@ int main(int argc, char* argv[]) {
     pthread_t zobrazovacVlakno;
 
     pthread_create(&zobrazovacVlakno, NULL, &vlaknoZobrazovacFunkcia, &sock);
-
-
-
-
-
 
     char buff[4096];
     std::string userInput;
