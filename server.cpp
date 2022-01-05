@@ -263,9 +263,10 @@ int main() {
     }
     for(int i = 0; i < POCET_KLIENTOV; i++) {
         pthread_cancel(vlakna[i]);
+        pthread_join(vlakna[i], NULL);
     }
     pthread_cancel(pocuvac);
-
+    pthread_join(pocuvac, NULL);
 
     data->zatvorVsetkyOtvoreneSockety();
 
@@ -275,7 +276,7 @@ int main() {
     pthread_mutex_destroy(&mutexSpravy);
 
 
-
+    //TODO rozposlat nedorucene spravy pouzivatelom
 
     delete data;
     return 0;

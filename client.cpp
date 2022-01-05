@@ -9,13 +9,9 @@
 #include <functional>
 #include <pthread.h>
 #include <errno.h>
-#include <signal.h>
 
 #include "Konstanty.h"
 
-void zachytavac_chyby(int signum){
-
-}
 
 void* vlaknoZobrazovacFunkcia(void* data) {
     int* sock = (int*) data;
@@ -72,7 +68,6 @@ int main(int argc, char* argv[]) {
     char buff[4096];
     std::string userInput;
 
-    signal(SIGPIPE, zachytavac_chyby);
 
     while(true) {
 
@@ -82,10 +77,10 @@ int main(int argc, char* argv[]) {
             break;
         }
 
-        int sendVysledok = send(sock, userInput.c_str(), userInput.size(), 0);
-        std:: cout << "Chyba: " << std::to_string(errno) << "\n";
+        int sendVysledok = send(sock, userInput.c_str(), userInput.size(), MSG_NOSIGNAL);
+        //std:: cout << "Chyba: " << std::to_string(errno) << "\n";
         //std:: cout << "Vysledok je takyto : " << std::to_string(sendVysledok) << "\n";
-        if(errno == __SIGRTMIN) {
+        if(sendVysledok == -1) {
             std::cout << "nebolo mozne odoslat na server";
             break;
         }
@@ -95,6 +90,7 @@ int main(int argc, char* argv[]) {
 
     }
     pthread_cancel(zobrazovacVlakno);
+    pthread_join(zobrazovacVlakno, NULL);
 
     close(sock);
 
