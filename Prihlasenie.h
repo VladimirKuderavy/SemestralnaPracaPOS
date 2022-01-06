@@ -101,6 +101,7 @@ private:
         std::string sprava = "Boli ste uspesne prihlaseny: \n";
         send(*socket, sprava.c_str(), sprava.size(), 0);
 
+        data->odosliUzivateloviNeprecitaneSpravy(pouzivatel);
 
         return pouzivatel;
     }

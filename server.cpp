@@ -252,13 +252,14 @@ void* funckiaVytvaracKlientov(void* dataPar) {
 
 int main() {
     pthread_mutex_t mutexSpravy;
+
     pthread_cond_t pdmSpravy;
 
     pthread_mutex_init(&mutexSpravy, NULL);
     pthread_cond_init(&pdmSpravy, NULL);
 
     Data* data = new Data(&mutexSpravy, &pdmSpravy);
-
+    data->nacitajVsetko();
 
 
     pthread_t pocuvac;
@@ -305,6 +306,8 @@ int main() {
     }
     */
 
+
+    //TODO Zamknut mutex
     pthread_cancel(pocuvac);
     pthread_join(pocuvac, NULL);
 
@@ -318,6 +321,9 @@ int main() {
     pthread_join(vytvaracKlientov, NULL);
 
 
+    //TODO unlock mutex
+    data->ulozVsetko();
+
 
     //pthread_join(pocuvac, NULL);
 
@@ -325,7 +331,7 @@ int main() {
     pthread_mutex_destroy(&mutexSpravy);
 
 
-    //TODO rozposlat nedorucene spravy pouzivatelom
+    // rozposlat nedorucene spravy pouzivatelom
 
     delete data;
     return 0;

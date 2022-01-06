@@ -46,6 +46,8 @@ private:
 
     pthread_mutex_t* mutexSpravy;
     pthread_cond_t* spravyPlus;
+
+    pthread_mutex_t mutexData;
 public:
 
 
@@ -53,6 +55,9 @@ public:
         this->mutexSpravy = mutexSpravy;
         this->spravyPlus = spravyPlus;
 
+        pthread_mutex_init(&mutexData, NULL);
+
+        /*
         std::string meno = "Andrej";
         std::string priezvisko = "123";
         Pouzivatel* pouzivatel = new Pouzivatel(meno, priezvisko);
@@ -62,6 +67,7 @@ public:
         priezvisko = "123";
         pouzivatel = new Pouzivatel(meno, priezvisko);
         pouzivatelia.insert({*pouzivatel->getMeno(), pouzivatel});
+         */
     }
     ~Data() {
         for(int i = 0; i < prihlaseni.size(); i++) {
@@ -74,6 +80,7 @@ public:
         for(int i = 0; i < konverzacie.size(); i++) {
             delete konverzacie[i];
         }
+        pthread_mutex_destroy(&mutexData);
     }
 
     void pridajOtvorenySocket(int socket) {
@@ -138,10 +145,10 @@ public:
         Konverzacia* konverzacia = (*pouzivatel->getKonverzacie())[indexKonverzacie];
 
         std::string hlavickaSpravy = "Nova sprava: " ;
-        hlavickaSpravy+= "Od pouzivatela: " + *pouzivatel->getMeno() + "\n";
-        hlavickaSpravy+= "v konverzacii: " + *konverzacia->getNazov() + "\n";
+        hlavickaSpravy += "Od pouzivatela: " + *pouzivatel->getMeno() + "\n";
+        hlavickaSpravy += "v konverzacii: " + *konverzacia->getNazov() + "\n";
 
-        hlavickaSpravy+= obsahSpravy;
+        hlavickaSpravy += "Napisal Vam: " + obsahSpravy + "\n";
         obsahSpravy = hlavickaSpravy;
 
         for(int i = 0; i < konverzacia->getZoznamUcastnikov()->size(); i++) {
@@ -159,7 +166,7 @@ public:
 
 
                     // 1. kto posiela, 2. v ktorej konverzacii, obsah spravy
-
+                    //ALTERNATIVA
                     //prida do spravy na odoslanie -> vyberie -> odosliSpravuCez socket
                     //odosliSpravuCezSocket
 
@@ -186,7 +193,9 @@ public:
             }
         }
         if(socket == -1) {
-            //TODO pridaj do zoznamu sprav ktore sa maju zobrazit uzivatelovi ked sa prihlasi
+            Pouzivatel* pouzivatel = pouzivatelia.find(menoUzivatela)->second;
+            //pridaj do zoznamu sprav ktore sa maju zobrazit uzivatelovi ked sa prihlasi
+            pouzivatel->pridajNeprecitanuSpravu(obsahSpravy);
         }
         std::cout << "Odoslal som spravu\n";
         std::cout << "Socket: " << std::to_string(socket);
@@ -194,17 +203,9 @@ public:
 
     }
 
-    std::string dajNeprecitaneSpravy(Pouzivatel* pouzivatel) {
-        std::string vrat = "";
-        for(int i = 0; i < pouzivatel->dajNeprecitaneSpravy()->size(); i++) {
-            vrat+= (*pouzivatel->dajNeprecitaneSpravy())[i] + "\n";
-        }
-        return vrat;
-    }
 
-    void pridajDoNeprecitanychSprav(Pouzivatel* pouzivatel, std::string sprava) {
 
-    }
+
 
 
     Pouzivatel* prihlas(std::string* meno, std::string* heslo, int* socket, std::string& dovodPrecoProblem) {
@@ -224,12 +225,27 @@ public:
 
             if(pouzivatelIterator->second->jeDobreHeslo(heslo)) {
                 prihlaseni.push_back(new Prihlaseny(pouzivatelIterator->second, socket));
+
+
+
+
                 return pouzivatelIterator->second;
             }
         }
         dovodPrecoProblem = "Zle pouzivatelske meno alebo heslo.\n ";
         return nullptr;
     }
+
+    void odosliUzivateloviNeprecitaneSpravy(Pouzivatel* pouzivatel) {
+        //ZMENA
+        std::vector<std::string>* neprecitaneSpravy = pouzivatel->dajNeprecitaneSpravy();
+        for(int i = 0; i < neprecitaneSpravy->size(); i++) {
+            //ALTERNATIVA
+            odosliSpravuCezSocket(*pouzivatel->getMeno(), (*neprecitaneSpravy)[i]);
+        }
+        pouzivatel->vymazNeprecitaneSpravy();
+    }
+
 
     void vytvorKonverzaciu(Pouzivatel* pouzivatel, int& indexKonverzacie, std::string& nazovKonverzacie) {
         Konverzacia* konverzacia = new Konverzacia(nazovKonverzacie);

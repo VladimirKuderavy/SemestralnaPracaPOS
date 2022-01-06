@@ -20,6 +20,10 @@ public:
         this->pouzivatelskeMeno = meno;
         this->heslo = heslo;
     }
+    void vymazNeprecitaneSpravy() {
+        this->neprecitaneSpravy.clear();
+    }
+
     void pridajNeprecitanuSpravu(std::string& sprava) {
         neprecitaneSpravy.push_back(sprava);
     }
