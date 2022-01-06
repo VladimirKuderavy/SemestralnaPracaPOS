@@ -8,82 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.VMOePQxXnb/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.VMOePQxXnb/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.VMOePQxXnb/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="client2">
-				<Option output="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/client2" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/usr/include/c++/10"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/10"/>
-					<Add directory="/usr/include/c++/10/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/10/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 client2"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="client2/fast">
-				<Option output="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/client2" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/usr/include/c++/10"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/10"/>
-					<Add directory="/usr/include/c++/10/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/10/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 client2/fast"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="client">
-				<Option output="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug"/>
+				<Option output="/tmp/tmp.VMOePQxXnb/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.VMOePQxXnb/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -97,15 +53,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 client"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 client"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="client/fast">
-				<Option output="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug"/>
+				<Option output="/tmp/tmp.VMOePQxXnb/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.VMOePQxXnb/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -119,15 +75,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 client/fast"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 client/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="server">
-				<Option output="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug"/>
+				<Option output="/tmp/tmp.VMOePQxXnb/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.VMOePQxXnb/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -141,15 +97,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 server"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 server"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="server/fast">
-				<Option output="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.kZl0Hzqpzl/cmake-build-debug"/>
+				<Option output="/tmp/tmp.VMOePQxXnb/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.VMOePQxXnb/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -163,80 +119,84 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 server/fast"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.kZl0Hzqpzl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 server/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.VMOePQxXnb/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Data.cpp">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Data.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Data.h">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Data.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Konstanty.h">
-			<Option target="client2"/>
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Konstanty.h">
 			<Option target="client"/>
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Konverzacia.cpp">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Konverzacia.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Konverzacia.h">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Konverzacia.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Moznosti.cpp">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Moznosti.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Moznosti.h">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Moznosti.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Pomocna.cpp">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Nacitavac.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Pomocna.h">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Pomocna.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Pouzivatel.cpp">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Pomocna.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Pouzivatel.h">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Pouzivatel.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Prihlasenie.cpp">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Pouzivatel.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Prihlasenie.h">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Prihlasenie.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Sprava.cpp">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Prihlasenie.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/Sprava.h">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Sprava.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/SpravaKonverzacii.cpp">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Sprava.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/SpravaKonverzacii.h">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/SpravaKonverzacii.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/SpravaPriatelstiev.cpp">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/SpravaKonverzacii.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/SpravaPriatelstiev.h">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/SpravaPriatelstiev.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/client.cpp">
-			<Option target="client2"/>
+		<Unit filename="/tmp/tmp.VMOePQxXnb/SpravaPriatelstiev.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.VMOePQxXnb/Zapisovac.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.VMOePQxXnb/client.cpp">
 			<Option target="client"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/server.cpp">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/server.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.kZl0Hzqpzl/CMakeLists.txt">
+		<Unit filename="/tmp/tmp.VMOePQxXnb/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

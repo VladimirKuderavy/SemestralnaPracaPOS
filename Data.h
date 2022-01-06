@@ -12,6 +12,9 @@
 #include "Sprava.h"
 #include <string>
 #include "unistd.h"
+#include "Zapisovac.h"
+#include "Nacitavac.h"
+#include <sstream>
 
 class Prihlaseny {
 private:
@@ -33,15 +36,10 @@ public:
 
 class Data {
 private:
-    //std::vector<Pouzivatel*> pouzivatelia;
     std::unordered_map<std::string, Pouzivatel*> pouzivatelia;
     std::vector<Prihlaseny*> prihlaseni;
     std::vector<Konverzacia*> konverzacie;
-
     std::vector<int> otvoreneSockety;
-
-
-
 
     //kriticka sekcia so spravou
     std::vector<Sprava*> spravy;
@@ -79,8 +77,7 @@ public:
     }
 
     void pridajOtvorenySocket(int socket) {
-
-
+        this->otvoreneSockety.push_back(socket);
     }
 
     void vymazOtvorenySocket(int socket) {
@@ -419,6 +416,20 @@ public:
         }
     }
 
+    void ulozVsetko() {
+        this->zapisPouzivatelov();
+        this->zapisPriatelovPouzivatelov();
+        this->zapisZiadostiOPriatelstvoPouzivatelov();
+        this->zapisNeprecitaneSpravyPoouzivatelov();
+    }
+
+    void nacitajVsetko() {
+        this->nacitajPouzivatelov();
+        this->nacitajPriatelovPouzivatelov();
+        this->nacitajZiadostiOPriatelstvoPouzivatelov();
+        this->nacitajNeprecitaneSpravyPoouzivatelov();
+    }
+
 
 
 private:
@@ -426,14 +437,183 @@ private:
         pouzivatel1->pridajDoPriatelov(pouzivatel2);
         pouzivatel2->pridajDoPriatelov(pouzivatel1);
     }
+
     void odoberZPriatelov(Pouzivatel* pouzivatel1, Pouzivatel* pouzivatel2) {
         pouzivatel1->odoberPriatela(pouzivatel2);
         pouzivatel2->odoberPriatela(pouzivatel1);
     }
 
+    void zapisPouzivatelov() {
+        std::string stringPouzivatelia;
+        for (auto pouzivatelIterator : this->pouzivatelia) {
+            stringPouzivatelia += pouzivatelIterator.second->toString();
+        }
 
+        Zapisovac::zapisPozivatelov(stringPouzivatelia);
+    }
 
+    void zapisPriatelovPouzivatelov() {
+        std::string stringPriatelia;
 
+        for (auto pouzivatelIterator : this->pouzivatelia) {
+
+            stringPriatelia += pouzivatelIterator.first + "\n";
+            std::vector<Pouzivatel*>* priatelia = pouzivatelIterator.second->getPriatelia();
+
+            for (int i = 0; i < priatelia->size(); ++i) {
+                stringPriatelia += *(*priatelia)[i]->getMeno() + "\n";
+            }
+
+            stringPriatelia += "<np>\n";
+        }
+
+        Zapisovac::zapisPriatelovPouzivatelov(stringPriatelia);
+    }
+
+    void zapisZiadostiOPriatelstvoPouzivatelov() {
+        std::string stringZiadosti;
+
+        for (auto pouzivatelIterator : this->pouzivatelia) {
+
+            stringZiadosti += pouzivatelIterator.first + "\n";
+            std::vector<Pouzivatel*>* ziadosti = pouzivatelIterator.second->getZiadostiOPriatelstvo();
+
+            for (int i = 0; i < ziadosti->size(); ++i) {
+                stringZiadosti += *(*ziadosti)[i]->getMeno() + "\n";
+            }
+
+            stringZiadosti += "<np>\n";
+        }
+
+        Zapisovac::zapisZiadostiOPriatelstvoPouzivatelov(stringZiadosti);
+    }
+
+    void zapisNeprecitaneSpravyPoouzivatelov() {
+        std::string stringSpravy;
+
+        for (auto pouzivatelIterator : this->pouzivatelia) {
+
+            stringSpravy += pouzivatelIterator.first + "\n";
+            std::vector<std::string>* neprecitaneSpravy = pouzivatelIterator.second->dajNeprecitaneSpravy();
+
+            for (int i = 0; i < neprecitaneSpravy->size(); ++i) {
+                stringSpravy += (*neprecitaneSpravy)[i] + "\n";
+
+                stringSpravy += "<ns>\n";
+            }
+            stringSpravy += "<np>\n";
+        }
+
+        Zapisovac::zapisNeprecitanychSpravPouzivatelov(stringSpravy);
+    }
+
+    void nacitajPouzivatelov() {
+        std::string stringPouzivatelia;
+        Nacitavac::nacitajPozivatelov(stringPouzivatelia);
+
+        std::istringstream stringStream(stringPouzivatelia);
+
+        std::string meno;
+        std::string heslo;
+
+        while (std::getline(stringStream, meno)) {
+            std::getline(stringStream, heslo);
+
+            pouzivatelia.insert({meno, new Pouzivatel(meno, heslo)});
+        }
+    }
+
+    void nacitajPriatelovPouzivatelov() {
+        std::string stringPriatelia;
+        Nacitavac::nacitajPriatelovPouzivatelov(stringPriatelia);
+
+        std::istringstream stringStream(stringPriatelia);
+
+        std::string meno;
+        Pouzivatel* pouzivatel = nullptr;
+        bool trebaZmenitPouzivatela = true;
+
+        while (std::getline(stringStream, meno)) {
+
+            if (meno == "<np>") {
+                trebaZmenitPouzivatela = true;
+                continue;
+            }
+
+            auto pouzivatelIterator = pouzivatelia.find(meno);
+
+            if (trebaZmenitPouzivatela) {
+                pouzivatel = pouzivatelIterator->second;
+                trebaZmenitPouzivatela = false;
+                continue;
+            }
+
+            pouzivatel->pridajDoPriatelov(pouzivatelIterator->second);
+        }
+    }
+
+    void nacitajZiadostiOPriatelstvoPouzivatelov() {
+        std::string stringZiadosti;
+        Nacitavac::nacitajZiadostiOPriatelstvoPouzivatelov(stringZiadosti);
+
+        std::istringstream stringStream(stringZiadosti);
+
+        std::string meno;
+        Pouzivatel* pouzivatel = nullptr;
+        bool trebaZmenitPouzivatela = true;
+
+        while (std::getline(stringStream, meno)) {
+
+            if (meno == "<np>") {
+                trebaZmenitPouzivatela = true;
+                continue;
+            }
+
+            auto pouzivatelIterator = pouzivatelia.find(meno);
+
+            if (trebaZmenitPouzivatela) {
+                pouzivatel = pouzivatelIterator->second;
+                trebaZmenitPouzivatela = false;
+                continue;
+            }
+
+            pouzivatel->pridajNovuZiadost(pouzivatelIterator->second);
+        }
+    }
+
+    void nacitajNeprecitaneSpravyPoouzivatelov() {
+        std::string stringNeprecitaneSpravy;
+        Nacitavac::nacitajNeprecitaneSpravyPouzivatelov(stringNeprecitaneSpravy);
+
+        std::istringstream stringStream(stringNeprecitaneSpravy);
+
+        std::string riadok;
+        std::string sprava;
+        Pouzivatel* pouzivatel = nullptr;
+        bool trebaZmenitPouzivatela = true;
+
+        while (std::getline(stringStream, riadok)) {
+
+            if (riadok == "<np>") {
+                trebaZmenitPouzivatela = true;
+                continue;
+            } else if (riadok == "<ns>") {
+                pouzivatel->pridajNeprecitanuSpravu(sprava);
+                sprava = "";
+                continue;
+            }
+
+            auto pouzivatelIterator = pouzivatelia.find(riadok);
+
+            if (trebaZmenitPouzivatela) {
+                pouzivatel = pouzivatelIterator->second;
+                trebaZmenitPouzivatela = false;
+                continue;
+            }
+
+            sprava += riadok + "\n";
+        }
+    }
 
 };
 

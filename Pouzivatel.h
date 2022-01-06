@@ -23,12 +23,9 @@ public:
     void pridajNeprecitanuSpravu(std::string& sprava) {
         neprecitaneSpravy.push_back(sprava);
     }
+
     std::vector<std::string>* dajNeprecitaneSpravy() {
         return &this->neprecitaneSpravy;
-    }
-
-    void pridajPriatela(Pouzivatel* pridajTohto) {
-        priatelia.push_back(pridajTohto);
     }
 
     void odoberPriatela(Pouzivatel* odoberTohto) {
@@ -50,12 +47,9 @@ public:
         return *parHeslo == this->heslo;
     }
 
-
     void pridajDoPriatelov(Pouzivatel* pouzivatel) {
         this->priatelia.push_back(pouzivatel);
     }
-
-
 
     bool uzJeVPriateloch(Pouzivatel* pouzivatel) {
         for(int i = 0; i < priatelia.size(); i++) {
@@ -108,6 +102,8 @@ public:
         ziadostiOPriatelstvo.push_back(pridaj);
     }
 
-
+    std::string toString() {
+        return this->pouzivatelskeMeno + "\n" + this->heslo + "\n";
+    }
 
 };

@@ -67,10 +67,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /tmp/tmp.kZl0Hzqpzl
+CMAKE_SOURCE_DIR = /tmp/tmp.VMOePQxXnb
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /tmp/tmp.kZl0Hzqpzl/cmake-build-debug
+CMAKE_BINARY_DIR = /tmp/tmp.VMOePQxXnb/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -99,9 +99,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.kZl0Hzqpzl/cmake-build-debug/CMakeFiles /tmp/tmp.kZl0Hzqpzl/cmake-build-debug//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.VMOePQxXnb/cmake-build-debug/CMakeFiles /tmp/tmp.VMOePQxXnb/cmake-build-debug//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.kZl0Hzqpzl/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /tmp/tmp.VMOePQxXnb/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -128,19 +128,6 @@ preinstall/fast:
 depend:
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
-
-#=============================================================================
-# Target rules for targets named client2
-
-# Build rule for target.
-client2: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 client2
-.PHONY : client2
-
-# fast build rule for target.
-client2/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client2.dir/build.make CMakeFiles/client2.dir/build
-.PHONY : client2/fast
 
 #=============================================================================
 # Target rules for targets named client
@@ -417,7 +404,6 @@ client.o: client.cpp.o
 
 # target to build an object file
 client.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client2.dir/build.make CMakeFiles/client2.dir/client.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.o
 .PHONY : client.cpp.o
 
@@ -427,7 +413,6 @@ client.i: client.cpp.i
 
 # target to preprocess a source file
 client.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client2.dir/build.make CMakeFiles/client2.dir/client.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.i
 .PHONY : client.cpp.i
 
@@ -437,7 +422,6 @@ client.s: client.cpp.s
 
 # target to generate assembly for a file
 client.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/client2.dir/build.make CMakeFiles/client2.dir/client.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/client.cpp.s
 .PHONY : client.cpp.s
 
@@ -477,7 +461,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... client"
-	@echo "... client2"
 	@echo "... server"
 	@echo "... Data.o"
 	@echo "... Data.i"
