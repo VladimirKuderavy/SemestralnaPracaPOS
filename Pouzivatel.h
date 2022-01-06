@@ -13,12 +13,20 @@ private:
     std::vector<Pouzivatel*> priatelia;
     std::vector<Pouzivatel*> ziadostiOPriatelstvo;
     std::vector<Konverzacia*> konverzacie;
+    std::vector<std::string> neprecitaneSpravy;
 
 public:
     Pouzivatel(std::string& meno, std::string& heslo) {
         this->pouzivatelskeMeno = meno;
         this->heslo = heslo;
     }
+    void pridajNeprecitanuSpravu(std::string& sprava) {
+        neprecitaneSpravy.push_back(sprava);
+    }
+    std::vector<std::string>* dajNeprecitaneSpravy() {
+        return &this->neprecitaneSpravy;
+    }
+
     void pridajPriatela(Pouzivatel* pridajTohto) {
         priatelia.push_back(pridajTohto);
     }

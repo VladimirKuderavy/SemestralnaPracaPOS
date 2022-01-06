@@ -61,17 +61,7 @@ public:
         }
         return false;
 
-        //FINISH nasej semky:
-        // HOTOVO odhlasenie
-        // HOTOVO zrusenie uctu - vsetkym zrusi priatelstvo
-            // HHOTOVO vymaze pouzivatela
 
-       // mutexy
-       // HOTOVO - beh servera - aby sa dal ukoncit korektne a
-       // pamat aby bola cista po vypnuti
-       // dorobit dorucovanie sprav pre odhlasenych pouzivatelov
-
-        //ukladanie do suboru
 
     }
 

@@ -158,7 +158,16 @@ public:
                     }
                 }
                 if(jeVPriateloch) {
-                    posliSpravu(adresat, obsahSpravy);
+
+
+
+                    // 1. kto posiela, 2. v ktorej konverzacii, obsah spravy
+
+                    //prida do spravy na odoslanie -> vyberie -> odosliSpravuCez socket
+                    //odosliSpravuCezSocket
+
+                    odosliSpravuCezSocket(adresat, obsahSpravy);
+                    //posliSpravu(adresat, obsahSpravy);
                     std::cout << "pridal som spravu do pola a zavolal pthread cond\n";
                 } else {
                     zoznamKtorymSaNepodariloPoslat+= adresat + "\n";
@@ -176,6 +185,7 @@ public:
         for(int i = 0; i < prihlaseni.size(); i++) {
             if(*(prihlaseni[i]->getPouzivatel()->getMeno()) == menoUzivatela) {
                 socket = prihlaseni[i]->getSocket();
+                break;
             }
         }
         if(socket == -1) {
@@ -187,19 +197,39 @@ public:
 
     }
 
+    std::string dajNeprecitaneSpravy(Pouzivatel* pouzivatel) {
+        std::string vrat = "";
+        for(int i = 0; i < pouzivatel->dajNeprecitaneSpravy()->size(); i++) {
+            vrat+= (*pouzivatel->dajNeprecitaneSpravy())[i] + "\n";
+        }
+        return vrat;
+    }
+
+    void pridajDoNeprecitanychSprav(Pouzivatel* pouzivatel, std::string sprava) {
+
+    }
 
 
-    Pouzivatel* prihlas(std::string* meno, std::string* heslo, int* socket) {
+    Pouzivatel* prihlas(std::string* meno, std::string* heslo, int* socket, std::string& dovodPrecoProblem) {
+
 
         auto pouzivatelIterator = this->pouzivatelia.find(*meno);
 
         if (pouzivatelIterator != this->pouzivatelia.end()) {
+
+            for(int i =0; i < prihlaseni.size(); i++) {
+                if(*(prihlaseni[i]->getPouzivatel()->getMeno()) == *meno) {
+                    dovodPrecoProblem = "Uz ste prihlaseny z ineho pocitaca.\n";
+                    return nullptr;
+                }
+            }
+
             if(pouzivatelIterator->second->jeDobreHeslo(heslo)) {
                 prihlaseni.push_back(new Prihlaseny(pouzivatelIterator->second, socket));
                 return pouzivatelIterator->second;
             }
         }
-
+        dovodPrecoProblem = "Zle pouzivatelske meno alebo heslo.\n ";
         return nullptr;
     }
 
