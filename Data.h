@@ -221,6 +221,7 @@ public:
                 }
             }
 
+
             if(pouzivatelIterator->second->jeDobreHeslo(heslo)) {
                 prihlaseni.push_back(new Prihlaseny(pouzivatelIterator->second, socket));
                 return pouzivatelIterator->second;
@@ -410,11 +411,16 @@ public:
     void odhlasPouzivatela(Pouzivatel* odhlasMna) {
         for(int i = 0; i < this->prihlaseni.size(); i++) {
             if(this->prihlaseni[i]->getPouzivatel() == odhlasMna) {
-               this->prihlaseni.erase(this->prihlaseni.begin() + i);
+                Prihlaseny* prihlaseny = this->prihlaseni[i];
+                delete prihlaseny;
+
+                this->prihlaseni.erase(this->prihlaseni.begin() + i);
                break;
             }
         }
     }
+
+
 
     void ulozVsetko() {
         this->zapisPouzivatelov();

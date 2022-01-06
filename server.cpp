@@ -22,6 +22,11 @@ typedef struct dataACisloPortu {
     Data* data;
 } DATAACISLOKPORTU;
 
+typedef struct dataAVlakna {
+    Data* data;
+    std::vector<pthread_t>* vlaknaKlientov;
+} DATAAVLAKNA;
+
 void* vlaknoFunkcia(void* param) {
 
 
@@ -34,77 +39,77 @@ void* vlaknoFunkcia(void* param) {
 
 
 
-        data->pridajOtvorenySocket(clientSocket);
+    data->pridajOtvorenySocket(clientSocket);
 
 
-        //1 kilneme to spojenie manualne pri zabiti  toho vlakna
-        //2 bool premenna, ktora sa zastavi -> porty na ktorych su uzivatelia sa vypnu ked sa odhlasia
+    //1 kilneme to spojenie manualne pri zabiti  toho vlakna
+    //2 bool premenna, ktora sa zastavi -> porty na ktorych su uzivatelia sa vypnu ked sa odhlasia
             //porty na ktorych nie su sa vypnu, ked sa niekto pripoji
 
-        if (clientSocket == -1) {
-            std::cerr << "Problem s pripojenim klienta";
+    if (clientSocket == -1) {
+        std::cerr << "Problem s pripojenim klienta";
+        return NULL;
+    }
+
+    //Po úspešnom vytvorení spojenia vráti accept deskriptor socketu reprezentujúceho spojenie s konkrétnym klientom.
+    // V danom čase môže byť takýchto spojení vytvorených viacero súčasne a každé je identifikované vlastným deskriptorom.
+
+    //close the listening
+
+
+
+   bool odpojiloHo = false;
+    while(!odpojiloHo) {
+    Pouzivatel *pouzivatel = Prihlasenie::prihlasenie(data, &clientSocket);
+    if(pouzivatel == nullptr) {
+        break;
+    }
+
+    std::cout << *pouzivatel->getMeno() << " " << std::to_string(clientSocket);
+
+    if(Moznosti::vyberSiMoznost(pouzivatel, data, &clientSocket)) {
+        odpojiloHo = true;
+    };
+
+    data->odhlasPouzivatela(pouzivatel);
+
+    /*
+    while(true) {
+        //ak sa niekto prihlasi a odpoji sa, tak ho treba zmazat z prihlasenych
+        //vycistit bufer
+
+
+
+
+
+        /*
+        memset(buf, 0, 4096);
+        int bytesRecv = recv(clientSocket, buf, 4096, 0);
+
+        if(buf == "kkk") {
             return NULL;
         }
 
-        //Po úspešnom vytvorení spojenia vráti accept deskriptor socketu reprezentujúceho spojenie s konkrétnym klientom.
-        // V danom čase môže byť takýchto spojení vytvorených viacero súčasne a každé je identifikované vlastným deskriptorom.
-
-        //close the listening
-
-
-
-       bool odpojiloHo = false;
-        while(!odpojiloHo) {
-        Pouzivatel *pouzivatel = Prihlasenie::prihlasenie(data, &clientSocket);
-        if(pouzivatel == nullptr) {
+        if(bytesRecv == -1) {
+            std::cerr << "Problem so spojenim";
+            break;
+        }
+        if(bytesRecv == 0) {
+            std::cout << "Klient sa odpojil" << "\n";
             break;
         }
 
-        std::cout << *pouzivatel->getMeno() << " " << std::to_string(clientSocket);
+        std::cout << "Received: " << std::string(buf, 0, bytesRecv) << std::endl;
 
-        if(Moznosti::vyberSiMoznost(pouzivatel, data, &clientSocket)) {
-            odpojiloHo = true;
-        };
+        std::string s = "nieco";
 
-        data->odhlasPouzivatela(pouzivatel);
 
-        /*
-        while(true) {
-            //ak sa niekto prihlasi a odpoji sa, tak ho treba zmazat z prihlasenych
-            //vycistit bufer
+        send(clientSocket, s.c_str(), s.size(), 0);
 
 
 
-
-
-            /*
-            memset(buf, 0, 4096);
-            int bytesRecv = recv(clientSocket, buf, 4096, 0);
-
-            if(buf == "kkk") {
-                return NULL;
-            }
-
-            if(bytesRecv == -1) {
-                std::cerr << "Problem so spojenim";
-                break;
-            }
-            if(bytesRecv == 0) {
-                std::cout << "Klient sa odpojil" << "\n";
-                break;
-            }
-
-            std::cout << "Received: " << std::string(buf, 0, bytesRecv) << std::endl;
-
-            std::string s = "nieco";
-
-
-            send(clientSocket, s.c_str(), s.size(), 0);
-
-
-
-        }
-        */
+    }
+    */
 
 
 
@@ -113,7 +118,6 @@ void* vlaknoFunkcia(void* param) {
     data->zatvorSocket(clientSocket);
     return NULL;
 }
-
 
 void* funkciaPosielacSprav(void* parData) {
     Data* data = (Data*) parData;
@@ -141,18 +145,9 @@ void* funkciaPosielacSprav(void* parData) {
 }
 
 
-
-int main() {
-    pthread_mutex_t mutexSpravy;
-    pthread_cond_t pdmSpravy;
-
-    pthread_mutex_init(&mutexSpravy, NULL);
-    pthread_cond_init(&pdmSpravy, NULL);
-
-    Data* data = new Data(&mutexSpravy, &pdmSpravy);
-
-
-
+void* funckiaVytvaracKlientov(void* dataPar) {
+    DATAAVLAKNA* dataavlakna = (DATAAVLAKNA*) dataPar;
+    Data* data = dataavlakna->data;
 
     //---------------------------------------------
     //---------------------------------------------
@@ -169,7 +164,7 @@ int main() {
     int listening = socket(AF_INET, SOCK_STREAM, 0);
     if(listening == -1) {
         std::cerr << "Nemozem vytvorit socket";
-        return 0;
+        return nullptr;
     }
     //socket ktory sa vytvoril nema adresu,
     //ak chcemee na sockete prijimat spojenia, musime mu adresu priradit pomocou bind
@@ -189,7 +184,7 @@ int main() {
 
     if (bind(listening, (sockaddr*)&hint, sizeof(hint)) == -1) {
         std::cerr << "Nemozem nabindovat na IP /port";
-        return 0;
+        return nullptr;
     }
 
 
@@ -217,35 +212,22 @@ int main() {
     //3. parameter - addrlen - skutocna velkost instancie, na ktoru ukazuje param addr.
     //                  odovzdava sa adresa premennej obsahujucej sizeof
 
-
-
-    //1 vytvoril sa hlavny socket
-    //2 pockalo sa na to kym sa niekto pripoji na ten podsocket a vytvorilo ho
-    //4 zavrel ten podsocket
-    //3 zavrel ten hlavny
-
-
-
-
-
-    /*DATAACISLOKPORTU dataacislokportu[POCET_KLIENTOV];
-    for(int i = 0; i < POCET_KLIENTOV; i++) {
-        dataacislokportu[i].data = data;
-        dataacislokportu[i].cislo = i;
-    }
-
-
-    pthread_t vlakna[POCET_KLIENTOV];
-
-    */
-    pthread_t pocuvac;
-    pthread_create(&pocuvac, NULL, &funkciaPosielacSprav, data);
-
-    std::vector<pthread_t> klienti;
-
-
+    data->pridajOtvorenySocket(listening);
     while(true) {
         int clientSocket = accept(listening, (sockaddr *) &client, &clientSize);
+
+
+
+        int result = getnameinfo((sockaddr *) &client, sizeof(client), host, NI_MAXHOST, svc, NI_MAXSERV, 0);
+
+        if (result) {
+            std::cout << host << "connected on " << svc << std::endl;
+        } else {
+            inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
+            std::cout << host << "conected on " << ntohs(client.sin_port) << std::endl;
+        }
+        memset(host, 0, NI_MAXHOST);
+        memset(svc, 0, NI_MAXSERV);
 
         pthread_t vlakno;
 
@@ -257,29 +239,39 @@ int main() {
         };
 
         pthread_create(&vlakno, NULL, &vlaknoFunkcia, &dataacislokportu);
-        klienti.push_back(vlakno);
+        dataavlakna->vlaknaKlientov->push_back(vlakno);
     }
 
-    close(listening);
 
 
 
+    return NULL;
+}
 
 
-    memset(host, 0, NI_MAXHOST);
-    memset(svc, 0, NI_MAXSERV);
+
+int main() {
+    pthread_mutex_t mutexSpravy;
+    pthread_cond_t pdmSpravy;
+
+    pthread_mutex_init(&mutexSpravy, NULL);
+    pthread_cond_init(&pdmSpravy, NULL);
+
+    Data* data = new Data(&mutexSpravy, &pdmSpravy);
 
 
-    int result = getnameinfo((sockaddr *) &client, sizeof(client), host, NI_MAXHOST, svc, NI_MAXSERV, 0);
 
-    if (result) {
-        std::cout << host << "connected on " << svc << std::endl;
-    } else {
-        inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
-        std::cout << host << "conected on " << ntohs(client.sin_port) << std::endl;
-    }
-    char buf[4096];
+    pthread_t pocuvac;
+    pthread_create(&pocuvac, NULL, &funkciaPosielacSprav, data);
 
+    std::vector<pthread_t> klienti;
+    DATAAVLAKNA dataAVlakna = {
+            data,
+            &klienti
+    };
+
+    pthread_t vytvaracKlientov;
+    pthread_create(&vytvaracKlientov, NULL, &funckiaVytvaracKlientov, &dataAVlakna);
 
 
     /*
@@ -318,6 +310,15 @@ int main() {
 
     data->zatvorVsetkyOtvoreneSockety();
 
+    for(int i = 0; i < klienti.size(); i++) {
+        pthread_cancel(klienti[i]);
+        pthread_join(klienti[i], NULL);
+    }
+    pthread_cancel(vytvaracKlientov);
+    pthread_join(vytvaracKlientov, NULL);
+
+
+
     //pthread_join(pocuvac, NULL);
 
     pthread_cond_destroy(&pdmSpravy);
@@ -329,18 +330,7 @@ int main() {
     delete data;
     return 0;
 
-    //FINISH nasej semky:
-    // HOTOVO odhlasenie
-    // HOTOVO zrusenie uctu - vsetkym zrusi priatelstvo
-    // HHOTOVO vymaze pouzivatela
 
-
-    // HOTOVO - beh servera - aby sa dal ukoncit korektne a
-    // HOTOVO pamat aby bola cista po vypnuti
-
-    // dorobit dorucovanie sprav pre odhlasenych pouzivatelov
-    // mutexy
-    //ukladanie do suboru a nacitavanie
 
 }
 
