@@ -82,24 +82,35 @@ public:
         }
         pthread_mutex_destroy(&mutexData);
     }
-
+    //TODO hotovo
     void pridajOtvorenySocket(int socket) {
-        this->otvoreneSockety.push_back(socket);
-    }
+        pthread_mutex_lock(&mutexData);
 
+        this->otvoreneSockety.push_back(socket);
+        pthread_mutex_unlock(&mutexData);
+
+    }
+    //TODO hotovo
     void vymazOtvorenySocket(int socket) {
+        pthread_mutex_lock(&mutexData);
+
         for(int i = 0; i < this->otvoreneSockety.size(); i++) {
             if(otvoreneSockety[i] == socket) {
                 otvoreneSockety.erase(otvoreneSockety.begin() + i);
                 break;
             }
         }
+        pthread_mutex_unlock(&mutexData);
+
     }
+    //TODO hotovo
     void zatvorSocket(int socket) {
         vymazOtvorenySocket(socket);
         close(socket);
     }
+    //TODO hotovo
     void zatvorVsetkyOtvoreneSockety() {
+        //Toto sa vola az v maine, ked budu vsetky vlakna ukoncene
         for(int i = 0; i < this->otvoreneSockety.size(); i++) {
             close(this->otvoreneSockety[i]);
         }
@@ -125,7 +136,7 @@ public:
     //              ->zada v ktorej konv chce pisat ->vypyta obsah spravy ->potvrdit
 
 
-
+    //TODO pozreli sme
     bool posliSpravu(std::string& adresat, std::string obsahSpravy) {
         pthread_mutex_lock(this->mutexSpravy);
         this->spravy.push_back(new Sprava(adresat, obsahSpravy));
@@ -133,16 +144,19 @@ public:
         pthread_cond_signal(this->spravyPlus);
         return true;
     }
-
+    //TODO pozreli sme
     bool posliSpravu(Pouzivatel* pouzivatel, int indexKonverzacie, std::string& obsahSpravy, std::string& zoznamKtorymSaNepodariloPoslat) {
         //prejde vsetkych pouzivatelov danej konverzacie, pre kazdeho vytvori spravu a odosle ju
+        pthread_mutex_lock(&this->mutexData);
         if(pouzivatel->getKonverzacie()->size() <= indexKonverzacie ) {
+            pthread_mutex_unlock(&this->mutexData);
             return false;
         }
 
 
 
         Konverzacia* konverzacia = (*pouzivatel->getKonverzacie())[indexKonverzacie];
+        pthread_mutex_unlock(&this->mutexData);
 
         std::string hlavickaSpravy = "Nova sprava: " ;
         hlavickaSpravy += "Od pouzivatela: " + *pouzivatel->getMeno() + "\n";
@@ -151,16 +165,20 @@ public:
         hlavickaSpravy += "Napisal Vam: " + obsahSpravy + "\n";
         obsahSpravy = hlavickaSpravy;
 
+
         for(int i = 0; i < konverzacia->getZoznamUcastnikov()->size(); i++) {
             std::string adresat = (*konverzacia->getZoznamUcastnikov())[i];
             if(adresat != *pouzivatel->getMeno()) {
                 //kontrola ci ho ma odosielatel vo svojich priateloch, ak nie, tak to nieco vrati
                 bool jeVPriateloch = false;
+
+                pthread_mutex_lock(&this->mutexData);
                 for(int j = 0; j < pouzivatel->getPriatelia()->size(); j++) {
                     if(*(*pouzivatel->getPriatelia())[j]->getMeno() == adresat) {
                         jeVPriateloch = true;
                     }
                 }
+                pthread_mutex_unlock(&this->mutexData);
                 if(jeVPriateloch) {
 
 
@@ -184,8 +202,10 @@ public:
         return true;
     }
 
+    //TODO pozreli sme
     void odosliSpravuCezSocket(std::string menoUzivatela, std::string obsahSpravy) {
         int socket = -1;
+        pthread_mutex_lock(&this->mutexData);
         for(int i = 0; i < prihlaseni.size(); i++) {
             if(*(prihlaseni[i]->getPouzivatel()->getMeno()) == menoUzivatela) {
                 socket = prihlaseni[i]->getSocket();
@@ -197,6 +217,7 @@ public:
             //pridaj do zoznamu sprav ktore sa maju zobrazit uzivatelovi ked sa prihlasi
             pouzivatel->pridajNeprecitanuSpravu(obsahSpravy);
         }
+        pthread_mutex_unlock(&this->mutexData);
         std::cout << "Odoslal som spravu\n";
         std::cout << "Socket: " << std::to_string(socket);
         send(socket, obsahSpravy.c_str(), obsahSpravy.size(), 0);
@@ -207,9 +228,10 @@ public:
 
 
 
-
+    //TODO pozreteeeeeeee
     Pouzivatel* prihlas(std::string* meno, std::string* heslo, int* socket, std::string& dovodPrecoProblem) {
 
+        pthread_mutex_lock(&this->mutexData);
 
         auto pouzivatelIterator = this->pouzivatelia.find(*meno);
 
@@ -217,6 +239,7 @@ public:
 
             for(int i =0; i < prihlaseni.size(); i++) {
                 if(*(prihlaseni[i]->getPouzivatel()->getMeno()) == *meno) {
+                    pthread_mutex_unlock(&this->mutexData);
                     dovodPrecoProblem = "Uz ste prihlaseny z ineho pocitaca.\n";
                     return nullptr;
                 }
@@ -224,53 +247,67 @@ public:
 
 
             if(pouzivatelIterator->second->jeDobreHeslo(heslo)) {
+
                 prihlaseni.push_back(new Prihlaseny(pouzivatelIterator->second, socket));
 
 
-
+                pthread_mutex_unlock(&this->mutexData);
 
                 return pouzivatelIterator->second;
             }
         }
+        pthread_mutex_unlock(&this->mutexData);
         dovodPrecoProblem = "Zle pouzivatelske meno alebo heslo.\n ";
         return nullptr;
     }
-
+    //TODO pozreli sme
     void odosliUzivateloviNeprecitaneSpravy(Pouzivatel* pouzivatel) {
         //ZMENA
+        //tu by sa nikdy nemali prepisovat neprecitane spravy, lebo sa mozu len vymazat
+        //a to vzdy len na konci zavolania tejto metody, takze to nie je v kritickej sekcii
         std::vector<std::string>* neprecitaneSpravy = pouzivatel->dajNeprecitaneSpravy();
         for(int i = 0; i < neprecitaneSpravy->size(); i++) {
             //ALTERNATIVA
+
             odosliSpravuCezSocket(*pouzivatel->getMeno(), (*neprecitaneSpravy)[i]);
+
         }
         pouzivatel->vymazNeprecitaneSpravy();
+
+
     }
 
-
+    //TODO POZRELI SME
     void vytvorKonverzaciu(Pouzivatel* pouzivatel, int& indexKonverzacie, std::string& nazovKonverzacie) {
         Konverzacia* konverzacia = new Konverzacia(nazovKonverzacie);
 
         konverzacia->pridajUcastnika(*pouzivatel->getMeno());
-
+        pthread_mutex_lock(&this->mutexData);
         pouzivatel->getKonverzacie()->push_back(konverzacia);
 
         indexKonverzacie = pouzivatel->getKonverzacie()->size() -1;
 
         this->konverzacie.push_back(konverzacia);
-
+        pthread_mutex_unlock(&this->mutexData);
     }
-
+    //TODO hotovo
     bool pridajDoKonverzacie(Pouzivatel* pouzivatel, int& indexKonverzacie, int indexVPoliJehoPriatelov) {
+        pthread_mutex_lock(&this->mutexData);
         if(pouzivatel->getKonverzacie()->size() <= indexKonverzacie) {
+            pthread_mutex_unlock(&this->mutexData);
             return false;
         }
 
         if(pouzivatel->getPriatelia()->size() <= indexVPoliJehoPriatelov) {
+            pthread_mutex_unlock(&this->mutexData);
             return false;
         }
 
         Pouzivatel* pridajTohto = (*pouzivatel->getPriatelia())[indexVPoliJehoPriatelov];
         Konverzacia* konverzacia = (*pouzivatel->getKonverzacie())[indexKonverzacie];
+
+        pthread_mutex_unlock(&this->mutexData);
+
 
         for(int i = 0; i < konverzacia->getZoznamUcastnikov()->size(); i++) {
             if((*konverzacia->getZoznamUcastnikov())[i] ==  *pridajTohto->getMeno()) {
@@ -278,48 +315,63 @@ public:
             }
         }
 
+        pthread_mutex_lock(&this->mutexData);
         pridajTohto->getKonverzacie()->push_back(konverzacia);
-        (*pouzivatel->getKonverzacie())[indexKonverzacie]->pridajUcastnika(*(pridajTohto->getMeno()));
+        konverzacia->pridajUcastnika(*(pridajTohto->getMeno()));
+        pthread_mutex_unlock(&this->mutexData);
 
         return true;
     }
-
+    //TODO pozreli sme
     void registruj(std::string* meno, std::string* heslo) {
         Pouzivatel* pouzivatel = new Pouzivatel(*meno, *heslo);
+        pthread_mutex_lock(&this->mutexData);
         pouzivatelia.insert({*pouzivatel->getMeno(), pouzivatel});
+        pthread_mutex_unlock(&this->mutexData);
     }
-
+    //TODO pozreli sme
     bool jeMenoUnikatne(std::string& meno) {
+        pthread_mutex_lock(&this->mutexData);
         auto pouzivatelIterator = this->pouzivatelia.find(meno);
 
         if (pouzivatelIterator != this->pouzivatelia.end()) {
+            pthread_mutex_unlock(&this->mutexData);
             return false;
         }
-
+        pthread_mutex_unlock(&this->mutexData);
         return true;
     }
 
+    //TODO pozreli sme
     //true ak sa podarilo, false ak sa nepodarilo
     bool posliZiadostOPriatelstvo(Pouzivatel* odoslalZiadost, std::string menoKomuOdoslal) {
 
+        pthread_mutex_lock(&this->mutexData);
         auto posliTomutoIterator = this->pouzivatelia.find(menoKomuOdoslal);
 
+
         if (posliTomutoIterator == this->pouzivatelia.end()) {
+            pthread_mutex_unlock(&this->mutexData);
             return false;
         }
 
         if(posliTomutoIterator->second->jeVZiadostiach(odoslalZiadost)
             || posliTomutoIterator->second->uzJeVPriateloch(odoslalZiadost) ) {
-
+            pthread_mutex_unlock(&this->mutexData);
             return false;
 
         }
+        posliTomutoIterator->second->pridajNovuZiadost(odoslalZiadost);
+        pthread_mutex_unlock(&this->mutexData);
 
         //poslanie spravy tom ze bola odoslana
         std::string obsahSpravy = "Nova ziadost o priatelstvo od pouzivatela: " + *odoslalZiadost->getMeno();
+
+        //ZMENA
         this->posliSpravu(menoKomuOdoslal, obsahSpravy);
 
-        posliTomutoIterator->second->pridajNovuZiadost(odoslalZiadost);
+
+
         return true;
     }
 
@@ -335,55 +387,66 @@ public:
         odoberZPriatelov(odoslalZiadost, chceOdobratTohto);
 
     }*/
-
+    //TODO POZRELI SME
     std::string dajZoznamZiadostiOPriatelstvo(Pouzivatel* pouzivatel) {
         std::string vrat = "";
-        //zamknut mutex
+        pthread_mutex_lock(&this->mutexData);
         for(int i = 0; i < pouzivatel->getZiadostiOPriatelstvo()->size(); i++) {
             vrat += "["  + std::to_string(i) + "]" + *(*pouzivatel->getZiadostiOPriatelstvo())[i]->getMeno() + "\n";
         }
-        //unlock mutex
+        pthread_mutex_unlock(&this->mutexData);
         return vrat;
     }
 
 
 
     //vrati true, ak prebehlo vporiadku
+    //TODO pozreli sme
     bool spracujZiadostOPriatelstvo(Pouzivatel* pouzivatel,int index,bool prijal) {
+        pthread_mutex_lock(&this->mutexData);
         if(pouzivatel->getZiadostiOPriatelstvo()->size() <= index) {
+            pthread_mutex_unlock(&this->mutexData);
             return false;
         }
 
         Pouzivatel* pridajTohto = pouzivatel->vymazZoZiadostiOPriatelstvo(index);
 
         if(prijal) {
-
+            pridajDoPriatelov(pouzivatel, pridajTohto);
+            pthread_mutex_unlock(&this->mutexData);
             //posli spravu ze prial
             std::string obsahSpravy = "Pouzivatel " + *pouzivatel->getMeno() + " prial Vasu ziadost o priatelstvo.\n";
             this->posliSpravu(*pridajTohto->getMeno(), obsahSpravy);
 
-            pridajDoPriatelov(pouzivatel, pridajTohto);
+
 
         } else {
+            pthread_mutex_unlock(&this->mutexData);
             //posli spravu ze neprial
             std::string obsahSpravy = "Pouzivatel " + *pouzivatel->getMeno() + " odmietol Vasu ziadost o priatelstvo.\n";
+
+            //ZMENA
             this->posliSpravu(*pridajTohto->getMeno(), obsahSpravy);
 
-
         }
+
         return true;
     }
-
+    //TODO pozreli sme
     std::string dajZoznamPriatelov(Pouzivatel* pouzivatel) {
+
         std::string vrat = "";
+        pthread_mutex_lock(&this->mutexData);
         for(int i = 0; i < pouzivatel->getPriatelia()->size(); i++) {
             vrat += "["  + std::to_string(i) + "]" + *(*pouzivatel->getPriatelia())[i]->getMeno() + "\n";
         }
+        pthread_mutex_unlock(&this->mutexData);
         return vrat;
     }
-
+    //TODO pozreli sme
     std::string dajZoznamKonverzaciiPouzivatela(Pouzivatel* pouzivatel) {
         std::string vrat = "";
+        pthread_mutex_lock(&this->mutexData);
         for(int i = 0; i < pouzivatel->getKonverzacie()->size(); i++) {
             vrat += "["  + std::to_string(i) + "]" + *(*pouzivatel->getKonverzacie())[i]->getNazov() + "\n";
             vrat+="   Ucastnici: \n";
@@ -391,40 +454,66 @@ public:
                 vrat+= "," + (*(*pouzivatel->getKonverzacie())[i]->getZoznamUcastnikov())[j];
             }
         }
+        pthread_mutex_unlock(&this->mutexData);
         return vrat;
     }
 
     //vracia true ak prebehlo OK
+    //TODO pozreli sme
     bool spracujOdobratieZPriatelov(Pouzivatel* pouzivatel,int index, std::string dovod = "") {
+        pthread_mutex_lock(&this->mutexData);
         if(pouzivatel->getPriatelia()->size() <= index) {
+            pthread_mutex_unlock(&this->mutexData);
             return false;
         }
 
         Pouzivatel* odoberTohto = (*pouzivatel->getPriatelia())[index];
+        this->odoberZPriatelov(pouzivatel, odoberTohto);
+        pthread_mutex_unlock(&this->mutexData);
+
         //posli spravu ze odobral
         std::string obsahSpravy = "Uzivatel " + *pouzivatel->getMeno() + " si Vas odobral zo svojich priatelov " + dovod + "\n";
+
+        //ZMENA
         this->posliSpravu(*odoberTohto->getMeno(), obsahSpravy);
 
-
-        this->odoberZPriatelov(pouzivatel, odoberTohto);
 
         return true;
     }
 
-
+    //TODO hotovo
     void odstranPouzivateloviVsetkychPriatelov(Pouzivatel* pouzivatel) {
         int pocetNaOdobratie = pouzivatel->getPriatelia()->size();
         for(int i = 0; i < pocetNaOdobratie; i++) {
             spracujOdobratieZPriatelov(pouzivatel, 0, "z dovodu zrusenia uctu");
         }
+        /*
+        pthread_mutex_lock(&mutexData);
+        while(pouzivatel->getPriatelia()->size() > 0) {
+            pthread_mutex_unlock(&mutexData);
+            spracujOdobratieZPriatelov(pouzivatel, 0, "z dovodu zrusenia uctu");
+            pthread_mutex_lock(&mutexData);
+            //lock
+            //zavola sa moteda
+            //updatne sa pocet
+            //unlock
+        }*/
+        //TODO PREROBIT TOTO!!!
+        pthread_mutex_unlock(&mutexData);
     }
+    //TODO hotovo
     void odstranUcet(Pouzivatel* pouzivatel) {
+        pthread_mutex_lock(&mutexData);
+
         pouzivatelia.erase(*pouzivatel->getMeno());
+        pthread_mutex_unlock(&mutexData);
+
         delete pouzivatel;
     }
 
-
+    //TODO hotovo
     void odhlasPouzivatela(Pouzivatel* odhlasMna) {
+        pthread_mutex_lock(&mutexData);
         for(int i = 0; i < this->prihlaseni.size(); i++) {
             if(this->prihlaseni[i]->getPouzivatel() == odhlasMna) {
                 Prihlaseny* prihlaseny = this->prihlaseni[i];
@@ -434,6 +523,7 @@ public:
                break;
             }
         }
+        pthread_mutex_unlock(&mutexData);
     }
 
 
@@ -455,11 +545,12 @@ public:
 
 
 private:
+    //TODO pozreli sme - POZOR pri volani musi byt zamknuty
     void pridajDoPriatelov(Pouzivatel* pouzivatel1, Pouzivatel* pouzivatel2) {
         pouzivatel1->pridajDoPriatelov(pouzivatel2);
         pouzivatel2->pridajDoPriatelov(pouzivatel1);
     }
-
+    //TODO pozreli sme -  POZOR pri volani musi byt zamknuty
     void odoberZPriatelov(Pouzivatel* pouzivatel1, Pouzivatel* pouzivatel2) {
         pouzivatel1->odoberPriatela(pouzivatel2);
         pouzivatel2->odoberPriatela(pouzivatel1);

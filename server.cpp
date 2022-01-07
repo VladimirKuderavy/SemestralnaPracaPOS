@@ -65,7 +65,7 @@ void* vlaknoFunkcia(void* param) {
         break;
     }
 
-    std::cout << *pouzivatel->getMeno() << " " << std::to_string(clientSocket);
+    //std::cout << *pouzivatel->getMeno() << " " << std::to_string(clientSocket);
 
     if(Moznosti::vyberSiMoznost(pouzivatel, data, &clientSocket)) {
         odpojiloHo = true;

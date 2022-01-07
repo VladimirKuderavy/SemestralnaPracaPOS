@@ -29,7 +29,7 @@ public:
 
             send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
 
-            //vycistit bufer
+
             if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
                 return nullptr;
             }
