@@ -506,7 +506,7 @@ public:
             pridajDoPriatelov(pouzivatel, pridajTohto);
             pthread_mutex_unlock(&this->mutexData);
             //posli spravu ze prial
-            std::string obsahSpravy = "Pouzivatel " + *pouzivatel->getMeno() + " prial Vasu ziadost o priatelstvo.\n";
+            std::string obsahSpravy = "Pouzivatel " + *pouzivatel->getMeno() + " prijal Vasu ziadost o priatelstvo.\n";
             this->posliSpravu(*pridajTohto->getMeno(), obsahSpravy);
 
 

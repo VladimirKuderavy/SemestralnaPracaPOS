@@ -40,7 +40,7 @@ public:
     }
 
     static std::string getRelativnaCesta() {
-        return "/tmp/tmp.Fzhj68zyKm/clientPriecinok/";
+        return "/tmp/tmp.a9KrNM7V3L/clientPriecinok/";
     }
 };
 
