@@ -182,6 +182,33 @@ Data.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Data.cpp.s
 .PHONY : Data.cpp.s
 
+Hash.o: Hash.cpp.o
+
+.PHONY : Hash.o
+
+# target to build an object file
+Hash.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Hash.cpp.o
+.PHONY : Hash.cpp.o
+
+Hash.i: Hash.cpp.i
+
+.PHONY : Hash.i
+
+# target to preprocess a source file
+Hash.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Hash.cpp.i
+.PHONY : Hash.cpp.i
+
+Hash.s: Hash.cpp.s
+
+.PHONY : Hash.s
+
+# target to generate assembly for a file
+Hash.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Hash.cpp.s
+.PHONY : Hash.cpp.s
+
 Konverzacia.o: Konverzacia.cpp.o
 
 .PHONY : Konverzacia.o
@@ -465,6 +492,9 @@ help:
 	@echo "... Data.o"
 	@echo "... Data.i"
 	@echo "... Data.s"
+	@echo "... Hash.o"
+	@echo "... Hash.i"
+	@echo "... Hash.s"
 	@echo "... Konverzacia.o"
 	@echo "... Konverzacia.i"
 	@echo "... Konverzacia.s"

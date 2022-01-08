@@ -132,6 +132,12 @@
 		<Unit filename="/tmp/tmp.a9KrNM7V3L/Data.h">
 			<Option target="server"/>
 		</Unit>
+		<Unit filename="/tmp/tmp.a9KrNM7V3L/Hash.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.a9KrNM7V3L/Hash.h">
+			<Option target="server"/>
+		</Unit>
 		<Unit filename="/tmp/tmp.a9KrNM7V3L/Konstanty.h">
 			<Option target="client"/>
 			<Option target="server"/>
