@@ -4,7 +4,7 @@
 #pragma once
 #include <string>
 
-#define PORT 6469
+#define PORT 6461
 #define POCET_KLIENTOV 2
 
 class Konstanty {
@@ -24,6 +24,23 @@ public:
 
     static std::string getNazovSuboruZiadosti() {
         return "ziadosti.txt";;
+    }
+
+    static std::string getTextVstupDoModuNacitajSubor() {
+        return "<#nacitajSubor#>";
+    }
+
+
+    static std::string getTextSuborSaNepodariloNacitat() {
+        return "<#nenacitalSa#>";
+    }
+
+    static std::string getTextUlozSubor() {
+        return "<#ulozSubor#>";
+    }
+
+    static std::string getRelativnaCesta() {
+        return "/tmp/tmp.Fzhj68zyKm/clientPriecinok/";
     }
 };
 

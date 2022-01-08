@@ -144,6 +144,95 @@ public:
         pthread_cond_signal(this->spravyPlus);
         return true;
     }
+
+    void odosliSuborCezSocket(std::string& menoUzivatela, std::string& hlavickaSuboru, std::string& obsahSuboru) {
+        int socket = -1;
+
+        for(int i = 0; i < prihlaseni.size(); i++) {
+            if(*(prihlaseni[i]->getPouzivatel()->getMeno()) == menoUzivatela) {
+                socket = prihlaseni[i]->getSocket();
+                break;
+            }
+        }
+        if(socket == -1) {
+            Pouzivatel* pouzivatel = pouzivatelia.find(menoUzivatela)->second;
+            //pridaj do zoznamu sprav ktore sa maju zobrazit uzivatelovi ked sa prihlasi
+            std::string obsahSpravy = "V case Vasej nedostupnosti sa Vam niekto snazil poslat subor:\n";
+            pouzivatel->pridajNeprecitanuSpravu(obsahSpravy);
+            return;
+        }
+
+        //POSLANIE SUBORU
+        send(socket, hlavickaSuboru.c_str(), hlavickaSuboru.size(), 0);
+
+        int poslanePo = 0;
+
+        while(poslanePo < obsahSuboru.size()) {
+            int hornaHranica = 4096;
+            if(poslanePo + 4096 > obsahSuboru.size()) {
+                hornaHranica = obsahSuboru.size() - poslanePo;
+            }
+
+            std::string poslat = obsahSuboru.substr(poslanePo, hornaHranica);
+
+            send(socket, poslat.c_str(), poslat.size(), 0);
+
+
+            poslanePo += hornaHranica;
+        }
+
+
+    }
+
+
+    bool posliSubor(Pouzivatel* pouzivatel ,int indexKonverzacie ,std::string& nazovSuboru,std::string& obsahSuboru,std::string& zoznamKtorymSaNepodariloPoslat) {
+        if(pouzivatel->getKonverzacie()->size() <= indexKonverzacie ) {
+            pthread_mutex_unlock(&this->mutexData);
+            return false;
+        }
+
+        Konverzacia* konverzacia = (*pouzivatel->getKonverzacie())[indexKonverzacie];
+        std::string hlavickaSuboru = Konstanty::getTextUlozSubor() + "\n";
+        hlavickaSuboru += "Pouzivatel " + *pouzivatel->getMeno() + "Vam posiela subor: " +
+                nazovSuboru + " v konverzacii: " + *konverzacia->getNazov() + "\n";
+        hlavickaSuboru += nazovSuboru + "\n";
+        hlavickaSuboru += std::to_string(obsahSuboru.size()) + "\n";
+
+        for(int i = 0; i < konverzacia->getZoznamUcastnikov()->size(); i++) {
+            std::string adresat = (*konverzacia->getZoznamUcastnikov())[i];
+            if(adresat != *pouzivatel->getMeno()) {
+                //kontrola ci ho ma odosielatel vo svojich priateloch, ak nie, tak to nieco vrati
+                bool jeVPriateloch = false;
+
+
+
+
+
+                for(int j = 0; j < pouzivatel->getPriatelia()->size(); j++) {
+                    if(*(*pouzivatel->getPriatelia())[j]->getMeno() == adresat) {
+                        jeVPriateloch = true;
+                    }
+                }
+
+                if(jeVPriateloch) {
+                    odosliSuborCezSocket(adresat, hlavickaSuboru, obsahSuboru);
+
+
+
+                } else {
+                    zoznamKtorymSaNepodariloPoslat+= adresat + "\n";
+                }
+
+            }
+        }
+
+
+        return true;
+
+
+    }
+
+
     //TODO pozreli sme
     bool posliSpravu(Pouzivatel* pouzivatel, int indexKonverzacie, std::string& obsahSpravy, std::string& zoznamKtorymSaNepodariloPoslat) {
         //prejde vsetkych pouzivatelov danej konverzacie, pre kazdeho vytvori spravu a odosle ju
@@ -216,6 +305,8 @@ public:
             Pouzivatel* pouzivatel = pouzivatelia.find(menoUzivatela)->second;
             //pridaj do zoznamu sprav ktore sa maju zobrazit uzivatelovi ked sa prihlasi
             pouzivatel->pridajNeprecitanuSpravu(obsahSpravy);
+            pthread_mutex_unlock(&this->mutexData);
+            return;
         }
         pthread_mutex_unlock(&this->mutexData);
         std::cout << "Odoslal som spravu\n";

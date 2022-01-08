@@ -15,10 +15,10 @@ public:
 
 
 
-    static int prijmiSpravu(char* sprava, int* socket) {
-        memset(sprava, 0, 4096);
+    static int prijmiSpravu(char* sprava, int* socket, int velkost = 4096) {
+        memset(sprava, 0, velkost);
 
-        ssize_t bytesRecv = recv(*socket, sprava, 4096, 0);
+        ssize_t bytesRecv = recv(*socket, sprava, velkost, 0);
         if(bytesRecv == -1) {
             std::cerr << "Problem so spojenim";
             return 1;
@@ -31,6 +31,13 @@ public:
 
     }
 
+
+
+
+
+//klient buffer
+
+//
 
 };
 
