@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include "Konverzacia.h"
+#include "Hash.h"
+
 //
 // Created by Andrej on 3. 1. 2022.
 //
@@ -19,6 +21,7 @@ public:
     Pouzivatel(std::string& meno, std::string& heslo) {
         this->pouzivatelskeMeno = meno;
         this->heslo = heslo;
+        Hash::zahashujHeslo(this->heslo);
     }
     void vymazNeprecitaneSpravy() {
         this->neprecitaneSpravy.clear();
@@ -48,7 +51,7 @@ public:
         return &this->pouzivatelskeMeno;
     }
     bool jeDobreHeslo(std::string* parHeslo) {
-        return *parHeslo == this->heslo;
+        return Hash::overHeslo(this->heslo, *parHeslo);
     }
 
     void pridajDoPriatelov(Pouzivatel* pouzivatel) {
