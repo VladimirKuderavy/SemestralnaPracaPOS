@@ -46,10 +46,12 @@ public:
                 if(dosloKChybe) {
                     return nullptr;
                 }
+            } else {
+                stringSprava = "Zadali ste zlu moznost \n";
+                PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
             }
 
-            stringSprava = "Zadali ste zlu moznost \n";
-            PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
+
         }
         return pouzivatel;
     }

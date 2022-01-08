@@ -188,6 +188,7 @@ Hash.o: Hash.cpp.o
 
 # target to build an object file
 Hash.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Hash.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Hash.cpp.o
 .PHONY : Hash.cpp.o
 
@@ -197,6 +198,7 @@ Hash.i: Hash.cpp.i
 
 # target to preprocess a source file
 Hash.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Hash.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Hash.cpp.i
 .PHONY : Hash.cpp.i
 
@@ -206,6 +208,7 @@ Hash.s: Hash.cpp.s
 
 # target to generate assembly for a file
 Hash.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/Hash.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Hash.cpp.s
 .PHONY : Hash.cpp.s
 

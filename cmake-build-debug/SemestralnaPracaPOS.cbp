@@ -133,9 +133,11 @@
 			<Option target="server"/>
 		</Unit>
 		<Unit filename="/tmp/tmp.axHEHNOqPV/Hash.cpp">
+			<Option target="client"/>
 			<Option target="server"/>
 		</Unit>
 		<Unit filename="/tmp/tmp.axHEHNOqPV/Hash.h">
+			<Option target="client"/>
 			<Option target="server"/>
 		</Unit>
 		<Unit filename="/tmp/tmp.axHEHNOqPV/Konstanty.h">

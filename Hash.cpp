@@ -26,6 +26,14 @@ void Hash::odsifrujSpravu(std::string& zasifrovanaSprava) {
     }
 }
 
+void Hash::odsifrujSpravu(char* retazec, size_t pocetZnakov) {
+    int hash = MESSAGE_HASH;
+
+    for (int i = 0; i < pocetZnakov; ++i) {
+        retazec[i] -= hash;
+    }
+}
+
 void Hash::zahashujHeslo(std::string& heslo) {
     srand(time(nullptr));
     srand((Hash::getSeeds())[rand() % SEED_SIZE]);

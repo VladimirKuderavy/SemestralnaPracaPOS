@@ -14,6 +14,7 @@
 #include <sstream>
 
 #include "Konstanty.h"
+#include "Hash.h"
 
 typedef struct data {
     int* socket;
@@ -62,6 +63,7 @@ bool prijmanieSuboru(int& zmazRiadkov, std::string& sprava, char* buff, int* soc
             return true;
         }
         std::string obsahSpravy = std::string(buff, bytesReceived);
+        Hash::odsifrujSpravu(obsahSpravy);
 
         obsahSuboru += obsahSpravy;
         zostavaPocetZnakov -= obsahSpravy.size();
@@ -100,6 +102,7 @@ bool odosielanieSuboru(std::string& userInput, int& sock) {
             }
 
             std::string spravaNaServer =  Konstanty::getTextSuborSaNepodariloNacitat();
+            Hash::zasifrujSpravu(spravaNaServer);
             if(send(sock, spravaNaServer.c_str(), spravaNaServer.size(), MSG_NOSIGNAL) == -1) {
                 std::cout << "nebolo mozne odoslat na server";
                 return true;
@@ -126,7 +129,7 @@ bool odosielanieSuboru(std::string& userInput, int& sock) {
 
         std::string hlavickaSuboru = userInput + "\n";
         hlavickaSuboru += std::to_string(obsahSuboru.size()) + "\n";
-
+        Hash::zasifrujSpravu(hlavickaSuboru);
         if(send(sock, hlavickaSuboru.c_str(), hlavickaSuboru.size(), MSG_NOSIGNAL) == -1) {
             std::cout << "nebolo mozne odoslat na server";
             return true;
@@ -140,7 +143,7 @@ bool odosielanieSuboru(std::string& userInput, int& sock) {
             }
 
             std::string poslat = obsahSuboru.substr(poslanePo, hornaHranica);
-
+            Hash::zasifrujSpravu(poslat);
             if(send(sock, poslat.c_str(), poslat.size(), MSG_NOSIGNAL) == -1) {
                 std::cout << "nebolo mozne odoslat na server";
                 return true;
@@ -167,6 +170,7 @@ void* vlaknoZobrazovacFunkcia(void* dataPar) {
             break;
         }
         std::string sprava = std::string(buff, bytesReceived);
+        Hash::odsifrujSpravu(sprava);
 
         std::istringstream stringstream(sprava);
         std::string riadok;
@@ -176,7 +180,7 @@ void* vlaknoZobrazovacFunkcia(void* dataPar) {
         while(std::getline(stringstream, riadok)) {
 
             if(riadok == Konstanty::getTextVstupDoModuNacitajSubor()) {
-                sprava.erase(0, sprava.find("\n") + 1);
+                sprava.erase(sprava.find(Konstanty::getTextVstupDoModuNacitajSubor()), Konstanty::getTextVstupDoModuNacitajSubor().size());
                 data->trebaOdoslatSubor = true;
                 memset(buff, 0, 4096);
                 continue;
@@ -273,7 +277,7 @@ int main(int argc, char* argv[]) {
         if(userInput == "koniec") {
             break;
         }
-
+        Hash::zasifrujSpravu(userInput);
         int sendVysledok = send(sock, userInput.c_str(), userInput.size(), MSG_NOSIGNAL);
         //std:: cout << "Chyba: " << std::to_string(errno) << "\n";
         //std:: cout << "Vysledok je takyto : " << std::to_string(sendVysledok) << "\n";

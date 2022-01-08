@@ -3,6 +3,7 @@
 #include <sys/socket.h>
 #include <cstring>
 #include "Data.h"
+#include "Hash.h"
 
 
 
@@ -22,11 +23,14 @@ public:
             std::cout << "Klient sa odpojil" << "\n";
             return 1;
         }
+        Hash::odsifrujSpravu(sprava, bytesRecv);
         return 0;
 
     }
 
     static void odosliSpravu(std::string sprava, SocketAMutex* socketAMutex) {
+        Hash::zasifrujSpravu(sprava);
+
         pthread_mutex_lock(socketAMutex->getMutex());
         send(*socketAMutex->getSocket(), sprava.c_str(), sprava.size(), 0);
         pthread_mutex_unlock(socketAMutex->getMutex());

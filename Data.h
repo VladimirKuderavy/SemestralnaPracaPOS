@@ -15,6 +15,7 @@
 #include "Zapisovac.h"
 #include "Nacitavac.h"
 #include <sstream>
+#include "Hash.h"
 
 class Prihlaseny {
 private:
@@ -159,8 +160,12 @@ public:
     //              ->zada v ktorej konv chce pisat ->vypyta obsah spravy ->potvrdit
 
     //TODO hotovo
-    void odosliSuborCezSocket(std::string& menoUzivatela, std::string& hlavickaSuboru, std::string& obsahSuboru) {
+    //tunak treba posielat kopiu lebo sa to vola v cykle a keby nebola kopia, tak sa to zasifruje niekolkokrat
+    void odosliSuborCezSocket(std::string& menoUzivatela, std::string& hlavickaSuboru, std::string obsahSuboru) {
         int socket = -1;
+        Hash::zasifrujSpravu(obsahSuboru);
+        Hash::zasifrujSpravu(hlavickaSuboru);
+
         pthread_mutex_lock(&this->mutexData);
 
         for(int i = 0; i < prihlaseni.size(); i++) {
@@ -315,6 +320,9 @@ public:
 
     //TODO pozreli sme
     void odosliSpravuCezSocket(std::string menoUzivatela, std::string obsahSpravy) {
+        std::string obsahSpravyZasifrovany = obsahSpravy;
+        Hash::zasifrujSpravu(obsahSpravyZasifrovany);
+
         int socket = -1;
         pthread_mutex_lock(&this->mutexData);
         for(int i = 0; i < prihlaseni.size(); i++) {
@@ -336,7 +344,7 @@ public:
 
         std::cout << "Odoslal som spravu\n";
         std::cout << "Socket: " << std::to_string(socket);
-        send(socket, obsahSpravy.c_str(), obsahSpravy.size(), 0);
+        send(socket, obsahSpravyZasifrovany.c_str(), obsahSpravyZasifrovany.size(), 0);
 
         pthread_mutex_unlock(mutexSocketu);
     }
