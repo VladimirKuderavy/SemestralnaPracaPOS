@@ -12,18 +12,18 @@ class SpravaKonverzacii {
 public:
 
 
-    static bool vyberKonverzaciu(Pouzivatel* pouzivatel, Data* data, int* socket) {
+    static bool vyberKonverzaciu(Pouzivatel* pouzivatel, Data* data, SocketAMutex* socketAMutex) {
         bool koniec = false;
         while(!koniec) {
             std::string stringSprava = "Vyberte si konverzaciu: \n";
             stringSprava+= "[-2] Vytvorit novu konverzaciu\n";
             stringSprava+= "[-1] Krok spat\n";
             stringSprava+= data->dajZoznamKonverzaciiPouzivatela(pouzivatel);
-            send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+            PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
 
             char sprava[4096];
-            if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+            if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) == 1) {
                 return true;
             }
             int index = atoi(sprava) ;
@@ -32,30 +32,30 @@ public:
                 return false;
             }
             if(index == -2) {
-                vytvorKonverzaciu(pouzivatel, data, socket);
+                vytvorKonverzaciu(pouzivatel, data, socketAMutex);
                 continue;
             }
             //volba ci chce posla5 subor
             stringSprava = "[1]Chcem poslat textovu spravu\n";
             stringSprava += "[2]Chcem poslat subor\n";
-            send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+            PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
 
-            if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+            if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) == 1) {
                 return true;
             }
             if(sprava[0] == '2') {
                 //odoslanie suboru
-                if(posliSubor(pouzivatel, data, socket, index)) {
+                if(posliSubor(pouzivatel, data, socketAMutex, index)) {
                     return true;
                 }
                 continue;
             }
             //poslanie textovej spravy
             stringSprava = "Zadajte obsah spravy: \n";
-            send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+            PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
-            if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+            if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) == 1) {
                 return true;
             }
             std::string obsahSpravy = sprava;
@@ -67,15 +67,15 @@ public:
                     stringSprava = "Tymto ucastnikom sa nepodarilo spravu odoslat, lebo ich nemate v priateloch:\n";
                     stringSprava+= tymtoSaNepodariloOdoslat; + "\n";
                     stringSprava+= "Ostatnym ucastnikom konverzacie sa sprava poslala\n";
-                    send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+                    PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
                 } else {
                     stringSprava = "Sprava odoslana\n";
-                    send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+                    PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
                 }
 
             } else {
                 stringSprava = "Zadali ste zly index\n";
-                send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+                PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
             }
         }
         return false;
@@ -84,12 +84,12 @@ public:
 
     }
 
-    static bool vytvorKonverzaciu(Pouzivatel* pouzivatel, Data* data, int* socket) {
+    static bool vytvorKonverzaciu(Pouzivatel* pouzivatel, Data* data, SocketAMutex* socketAMutex) {
         std::string stringSprava = "Zadajte nazov konverzacie: \n";
-        send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+        PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
         char sprava[4096];
-        if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+        if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) == 1) {
             return true;
         }
         int indexNasejKonverzacie = -1;
@@ -102,10 +102,10 @@ public:
             stringSprava = "Vyber priatelov, ktorych chces pridat do konverzacie: \n";
             stringSprava+= "[-1] Krok spat\n";
             stringSprava+= data->dajZoznamPriatelov(pouzivatel);
-            send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+            PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
 
-            if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+            if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) == 1) {
                 return true;
             }
             int index = atoi(sprava) ;
@@ -117,24 +117,24 @@ public:
 
             if(data->pridajDoKonverzacie(pouzivatel, indexNasejKonverzacie, index)) {
                 stringSprava = "Priatel bol pridany do konverzacie\n";
-                send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
-                koniec = true;
+                PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
+                //koniec = true;
             } else {
                 stringSprava = "Zadali ste zly index alebo priatel uz je v konverzacii\n";
-                send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+                PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
             }
         }
         return false;
     }
 
-    static bool posliSubor(Pouzivatel* pouzivatel, Data* data, int* socket, int index) {
+    static bool posliSubor(Pouzivatel* pouzivatel, Data* data, SocketAMutex* socketAMutex, int index) {
 
         std::string stringSprava = "Naozaj chcete poslat subor? [1]\n";
         stringSprava += "krok spat [2]";
-        send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+        PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
         char sprava[4096];
-        if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+        if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) == 1) {
             return true;
         }
 
@@ -143,12 +143,12 @@ public:
         }
 
         stringSprava = "Zadajte nazov suboru: \n";
-        send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+        PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
         stringSprava= Konstanty::getTextVstupDoModuNacitajSubor()+"\n";
-        send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+        PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
-        if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+        if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) == 1) {
             return true;
         }
         std::string obsahSpravy = sprava;
@@ -183,7 +183,7 @@ public:
 
         while(zostavaPocetZnakov > 0) {
 
-            if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+            if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) == 1) {
                 return true;
             }
             obsahSpravy = sprava;
@@ -201,15 +201,15 @@ public:
                 stringSprava = "Tymto ucastnikom sa nepodarilo subor odoslat, lebo ich nemate v priateloch:\n";
                 stringSprava+= tymtoSaNepodariloOdoslat; + "\n";
                 stringSprava+= "Ostatnym ucastnikom konverzacie sa subor poslal\n";
-                send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+                PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
             } else {
                 stringSprava = "Subor odoslany\n";
-                send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+                PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
             }
 
         } else {
             stringSprava = "Zadali ste zly index\n";
-            send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+            PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
         }
 
 

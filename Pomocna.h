@@ -2,17 +2,12 @@
 #include <iostream>
 #include <sys/socket.h>
 #include <cstring>
+#include "Data.h"
+
 
 
 class PomocnaTrieda {
 public:
-
-
-    //TODO
-    //tu to mozes dat podla socketu
-    //ze najde v datach pouzivatela podla socketu ktory sem prichadza
-    //a ak doslo k problemu tak ho odtial vyhodi
-
 
 
     static int prijmiSpravu(char* sprava, int* socket, int velkost = 4096) {
@@ -29,6 +24,12 @@ public:
         }
         return 0;
 
+    }
+
+    static void odosliSpravu(std::string sprava, SocketAMutex* socketAMutex) {
+        pthread_mutex_lock(socketAMutex->getMutex());
+        send(*socketAMutex->getSocket(), sprava.c_str(), sprava.size(), 0);
+        pthread_mutex_unlock(socketAMutex->getMutex());
     }
 
 

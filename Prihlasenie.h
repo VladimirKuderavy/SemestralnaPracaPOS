@@ -15,7 +15,7 @@ public:
 
 
 
-    static Pouzivatel* prihlasenie(Data* data, int* socket) {
+    static Pouzivatel* prihlasenie(Data* data, SocketAMutex* socketAMutex) {
 
         bool bolUspesnePrihlaseny = false;
         char sprava[4096];
@@ -27,65 +27,68 @@ public:
             stringSprava+= "[1] Prihlásiť sa\n";
             stringSprava+= "[2] Zaregistrovať sa\n";
 
-            send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+            PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
 
-            if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+            if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) == 1) {
                 return nullptr;
             }
 
 
 
             if(sprava[0] == '1') {
-                pouzivatel = prihlasSa(data, socket);
+                pouzivatel = prihlasSa(data, socketAMutex);
                 if(pouzivatel != nullptr) {
                     bolUspesnePrihlaseny = true;
                 }
             } else if(sprava[0] == '2') {
-                bool dosloKChybe = registrujSa(data, socket);
+                bool dosloKChybe = registrujSa(data, socketAMutex);
                 if(dosloKChybe) {
                     return nullptr;
                 }
             }
 
             stringSprava = "Zadali ste zlu moznost \n";
+            PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
         }
         return pouzivatel;
     }
 private:
-    static Pouzivatel* prihlasSa(Data* data, int* socket) {
+    static Pouzivatel* prihlasSa(Data* data, SocketAMutex* socketAMutex) {
         bool uspesnePrihlaseny = false;
         Pouzivatel* pouzivatel = nullptr;
         while(!uspesnePrihlaseny) {
             std::string stringSprava = "Zadajte pouzivatelske meno: \n";
-            send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+            PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
+
 
             char sprava[4096];
-            if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+            if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) == 1) {
                 return nullptr;
             }
             std::string meno = sprava;
 
 
             stringSprava = "Zadajte heslo: \n";
-            send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+            PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
-            if(PomocnaTrieda::prijmiSpravu(sprava, socket) ==1) {
+            if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) ==1) {
                 return nullptr;
             }
 
             std::string heslo = sprava;
             std::string dovodPrecoProblem;
-            pouzivatel = data->prihlas(&meno, &heslo, socket, dovodPrecoProblem);
+            pouzivatel = data->prihlas(&meno, &heslo, socketAMutex->getSocket(), dovodPrecoProblem);
 
 
 
             if(pouzivatel == nullptr) {
                 stringSprava = dovodPrecoProblem +  "Chcete skusit znova [1 = ano]? \n";
-                send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+                PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
 
-                if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+
+                if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) == 1) {
                     return nullptr;
                 }
 
@@ -99,30 +102,31 @@ private:
             }
         }
         std::string sprava = "Boli ste uspesne prihlaseny: \n";
-        send(*socket, sprava.c_str(), sprava.size(), 0);
+        PomocnaTrieda::odosliSpravu(sprava, socketAMutex);
+
 
         data->odosliUzivateloviNeprecitaneSpravy(pouzivatel);
 
         return pouzivatel;
     }
 
-    static bool registrujSa(Data* data, int* socket) {
+    static bool registrujSa(Data* data, SocketAMutex* socketAMutex) {
 
         bool uspesneZaregistrovany  = false;
         while(!uspesneZaregistrovany) {
             char sprava[4096];
             std::string stringSprava = "Zadajte svoje pouzivatelske meno: \n";
-            send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+            PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
-            if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+            if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) == 1) {
                 return true;
             }
             std::string meno = sprava;
             if(data->jeMenoUnikatne(meno)) {
                 stringSprava = "Zadajte svoje heslo: \n";
-                send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+                PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
-                if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+                if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) == 1) {
                     return true;
                 }
                 std::string heslo = sprava;
@@ -130,14 +134,14 @@ private:
 
                 stringSprava = "Registracia prebehla uspesne. \n";
                 stringSprava += "Ak chcete, mozete sa prihlasit\n";
-                send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+                PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
                 uspesneZaregistrovany = true;
             } else {
                 stringSprava = "Pouzivatelske meno musi byt unikatne, chcete skusit znova?: \n";
                 stringSprava += "[1] ano chcem.\n";
-                send(*socket, stringSprava.c_str(), stringSprava.size(), 0);
+                PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
-                if(PomocnaTrieda::prijmiSpravu(sprava, socket) == 1) {
+                if(PomocnaTrieda::prijmiSpravu(sprava, socketAMutex->getSocket()) == 1) {
                     return true;
                 }
                 if(sprava[0] != '1') {
