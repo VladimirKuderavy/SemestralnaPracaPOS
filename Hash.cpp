@@ -37,14 +37,17 @@ void Hash::zahashujHeslo(std::string& heslo) {
 }
 
 bool Hash::overHeslo(std::string& zasifrovaneHeslo, std::string& hesloNaOverenie) {
+
     for (int i = 0; i < SEED_SIZE; ++i) {
-        srand(Hash::seeds[i]);
-        int hash = rand() % HASH_RANGE;
+        std::string hladaneHeslo = hesloNaOverenie;
+
+        int hash = i - (HASH_RANGE / 2);
+
         for (int j = 0; j < hesloNaOverenie.size(); ++j) {
-            hesloNaOverenie[i] += hash;
+            hladaneHeslo[j] += hash;
         }
 
-        if (zasifrovaneHeslo == hesloNaOverenie) {
+        if (zasifrovaneHeslo == hladaneHeslo) {
             return true;
         }
     }
