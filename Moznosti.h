@@ -13,8 +13,8 @@ public:
             std::string stringSprava = "Vyberte si, co chcete robit: \n";
             stringSprava+="[1]Pridat pouzivatela do priatelov\n";
             stringSprava+="[2]Odstranit pouzivatela z priatelov\n";
-            stringSprava+="[3]Pozriet si ziadosti o pritelstvo\n";
-            stringSprava+="[4]Poslat spravu\n";
+            stringSprava+="[3]Pozriet si ziadosti o priatelstvo\n";
+            stringSprava+="[4]Poslat spravu alebo subor\n";
             stringSprava+="[5]Odhlasit sa\n";
             stringSprava+="[6]Zrusit ucet\n";
 

@@ -79,7 +79,7 @@ public:
     static bool potvrdenieAleboZamietnutieZiadosti(Pouzivatel* pouzivatel, Data* data, SocketAMutex* socketAMutex) {
         bool koniec = false;
         while(!koniec) {
-            std::string stringSprava = "Ziadosti od priatelstvo od tychto pouzivatelov: \n";
+            std::string stringSprava = "Ziadosti o priatelstvo od tychto pouzivatelov: \n";
             stringSprava+= "[-1] Krok spat\n";
             stringSprava+= data->dajZoznamZiadostiOPriatelstvo(pouzivatel);
             PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);

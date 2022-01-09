@@ -21,7 +21,6 @@ public:
     Pouzivatel(std::string& meno, std::string& heslo) {
         this->pouzivatelskeMeno = meno;
         this->heslo = heslo;
-        Hash::zahashujHeslo(this->heslo);
     }
     void vymazNeprecitaneSpravy() {
         this->neprecitaneSpravy.clear();

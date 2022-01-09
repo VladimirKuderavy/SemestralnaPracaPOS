@@ -161,7 +161,7 @@ public:
 
     //TODO hotovo
     //tunak treba posielat kopiu lebo sa to vola v cykle a keby nebola kopia, tak sa to zasifruje niekolkokrat
-    void odosliSuborCezSocket(std::string& menoUzivatela, std::string& hlavickaSuboru, std::string obsahSuboru) {
+    void odosliSuborCezSocket(std::string& menoUzivatela, std::string hlavickaSuboru, std::string obsahSuboru) {
         int socket = -1;
         Hash::zasifrujSpravu(obsahSuboru);
         Hash::zasifrujSpravu(hlavickaSuboru);
@@ -453,6 +453,7 @@ public:
     }
     //TODO pozreli sme
     void registruj(std::string* meno, std::string* heslo) {
+        Hash::zahashujHeslo(*heslo);
         Pouzivatel* pouzivatel = new Pouzivatel(*meno, *heslo);
         pthread_mutex_lock(&this->mutexData);
         pouzivatelia.insert({*pouzivatel->getMeno(), pouzivatel});

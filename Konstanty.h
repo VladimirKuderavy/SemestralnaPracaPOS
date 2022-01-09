@@ -11,19 +11,19 @@ class Konstanty {
 
 public:
     static std::string getNazovSuboruPouzivatelov() {
-        return "pouzivatelia.txt";
+        return "/tmp/tmp.bnEpdsMGjj/pouzivatelia.txt";
     }
 
     static std::string getNazovSuboruPriatelov() {
-        return "priatelia.txt";
+        return "/tmp/tmp.bnEpdsMGjj/priatelia.txt";
     }
 
     static std::string getNazovSuboruNeprecitanychSprav() {
-        return "spravy.txt";
+        return "/tmp/tmp.bnEpdsMGjj/spravy.txt";
     }
 
     static std::string getNazovSuboruZiadosti() {
-        return "ziadosti.txt";;
+        return "/tmp/tmp.bnEpdsMGjj/ziadosti.txt";
     }
 
     static std::string getTextVstupDoModuNacitajSubor() {
@@ -40,7 +40,7 @@ public:
     }
 
     static std::string getRelativnaCesta() {
-        return "/tmp/tmp.axHEHNOqPV/clientPriecinok/";
+        return "/tmp/tmp.bnEpdsMGjj/clientPriecinok/";
     }
 };
 

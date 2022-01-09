@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/tmp/tmp.axHEHNOqPV/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.bnEpdsMGjj/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/tmp/tmp.axHEHNOqPV/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.bnEpdsMGjj/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/tmp/tmp.axHEHNOqPV/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.bnEpdsMGjj/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="client">
-				<Option output="/tmp/tmp.axHEHNOqPV/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.axHEHNOqPV/cmake-build-debug"/>
+				<Option output="/tmp/tmp.bnEpdsMGjj/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.bnEpdsMGjj/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -53,15 +53,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 client"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 client"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="client/fast">
-				<Option output="/tmp/tmp.axHEHNOqPV/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.axHEHNOqPV/cmake-build-debug"/>
+				<Option output="/tmp/tmp.bnEpdsMGjj/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.bnEpdsMGjj/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -75,15 +75,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 client/fast"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 client/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="server">
-				<Option output="/tmp/tmp.axHEHNOqPV/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.axHEHNOqPV/cmake-build-debug"/>
+				<Option output="/tmp/tmp.bnEpdsMGjj/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.bnEpdsMGjj/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -97,15 +97,15 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 server"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 server"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="server/fast">
-				<Option output="/tmp/tmp.axHEHNOqPV/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/tmp/tmp.axHEHNOqPV/cmake-build-debug"/>
+				<Option output="/tmp/tmp.bnEpdsMGjj/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.bnEpdsMGjj/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -119,92 +119,92 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 server/fast"/>
-					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.axHEHNOqPV/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 server/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/tmp/tmp.bnEpdsMGjj/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Data.cpp">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Data.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Data.h">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Data.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Hash.cpp">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Hash.cpp">
 			<Option target="client"/>
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Hash.h">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Hash.h">
 			<Option target="client"/>
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Konstanty.h">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Konstanty.h">
 			<Option target="client"/>
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Konverzacia.cpp">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Konverzacia.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Konverzacia.h">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Konverzacia.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Moznosti.cpp">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Moznosti.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Moznosti.h">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Moznosti.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Nacitavac.h">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Nacitavac.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Pomocna.cpp">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Pomocna.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Pomocna.h">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Pomocna.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Pouzivatel.cpp">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Pouzivatel.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Pouzivatel.h">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Pouzivatel.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Prihlasenie.cpp">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Prihlasenie.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Prihlasenie.h">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Prihlasenie.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Sprava.cpp">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Sprava.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Sprava.h">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Sprava.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/SpravaKonverzacii.cpp">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/SpravaKonverzacii.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/SpravaKonverzacii.h">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/SpravaKonverzacii.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/SpravaPriatelstiev.cpp">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/SpravaPriatelstiev.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/SpravaPriatelstiev.h">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/SpravaPriatelstiev.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/Zapisovac.h">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Zapisovac.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/client.cpp">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/client.cpp">
 			<Option target="client"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/server.cpp">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/server.cpp">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.axHEHNOqPV/CMakeLists.txt">
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

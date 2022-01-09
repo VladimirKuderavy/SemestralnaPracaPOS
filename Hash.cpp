@@ -39,6 +39,10 @@ void Hash::zahashujHeslo(std::string& heslo) {
     srand((Hash::getSeeds())[rand() % SEED_SIZE]);
     int hash = (rand() % HASH_RANGE) - (HASH_RANGE / 2);
 
+    while (hash == 0) {
+        hash = (rand() % HASH_RANGE) - (HASH_RANGE / 2);
+    }
+
     for (int i = 0; i < heslo.size(); ++i) {
         heslo[i] += hash;
     }
