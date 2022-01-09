@@ -9,16 +9,15 @@
 #include <functional>
 #include <pthread.h>
 #include <errno.h>
-
 #include<fstream>
 #include <sstream>
-
 #include "Konstanty.h"
 #include "Hash.h"
 
 typedef struct data {
     int* socket;
     bool trebaOdoslatSubor;
+    pthread_mutex_t* mutex;
 } DATA;
 
 bool prijmanieSuboru(int& zmazRiadkov, std::string& sprava, char* buff, int* sock) {
@@ -107,7 +106,8 @@ bool odosielanieSuboru(std::string& userInput, int& sock) {
                 std::cout << "nebolo mozne odoslat na server";
                 return true;
             }
-            return true;
+
+            return false;
         }
 
         //tunak nacita cely subor a poposiela ho na server
@@ -181,7 +181,12 @@ void* vlaknoZobrazovacFunkcia(void* dataPar) {
 
             if(riadok == Konstanty::getTextVstupDoModuNacitajSubor()) {
                 sprava.erase(sprava.find(Konstanty::getTextVstupDoModuNacitajSubor()), Konstanty::getTextVstupDoModuNacitajSubor().size());
+
+                pthread_mutex_lock(data->mutex);
                 data->trebaOdoslatSubor = true;
+                pthread_mutex_unlock(data->mutex);
+
+
                 memset(buff, 0, 4096);
                 continue;
             }
@@ -217,7 +222,7 @@ void* vlaknoZobrazovacFunkcia(void* dataPar) {
     return nullptr;
 }
 
-int main(int argc, char* argv[]) {
+int main() {
 
     int sock = socket(AF_INET, SOCK_STREAM, 0);
     if(sock == -1) {
@@ -226,7 +231,7 @@ int main(int argc, char* argv[]) {
     }
 
     //vytvorenie hint struktury
-    int port = PORT + atoi(argv[1]);
+    int port = PORT;
     std::string ipAdresa = "127.0.0.1";
 
     sockaddr_in hint;
@@ -247,10 +252,14 @@ int main(int argc, char* argv[]) {
     }
 
     pthread_t zobrazovacVlakno;
+    pthread_mutex_t mutex;
+
+    pthread_mutex_init(&mutex, NULL);
 
     DATA data = {
             &sock,
-            false
+            false,
+            &mutex
     };
 
     pthread_create(&zobrazovacVlakno, NULL, &vlaknoZobrazovacFunkcia, &data);
@@ -264,8 +273,10 @@ int main(int argc, char* argv[]) {
         //std::cout << "Zadaj text:";
         getline(std::cin, userInput);
 
+        pthread_mutex_lock(&mutex);
         if(data.trebaOdoslatSubor) {
             data.trebaOdoslatSubor = false;
+            pthread_mutex_unlock(&mutex);
 
             if (odosielanieSuboru(userInput, sock)) {
                 break;
@@ -273,14 +284,15 @@ int main(int argc, char* argv[]) {
                 continue;
             }
         }
+        pthread_mutex_unlock(&mutex);
 
         if(userInput == "koniec") {
             break;
         }
+
         Hash::zasifrujSpravu(userInput);
         int sendVysledok = send(sock, userInput.c_str(), userInput.size(), MSG_NOSIGNAL);
-        //std:: cout << "Chyba: " << std::to_string(errno) << "\n";
-        //std:: cout << "Vysledok je takyto : " << std::to_string(sendVysledok) << "\n";
+
         if(sendVysledok == -1) {
             std::cout << "nebolo mozne odoslat na server";
 
@@ -293,6 +305,8 @@ int main(int argc, char* argv[]) {
 
     pthread_cancel(zobrazovacVlakno);
     pthread_join(zobrazovacVlakno, NULL);
+
+    pthread_mutex_destroy(&mutex);
 
     close(sock);
 

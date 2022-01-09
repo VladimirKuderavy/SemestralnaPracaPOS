@@ -212,33 +212,6 @@ Hash.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Hash.cpp.s
 .PHONY : Hash.cpp.s
 
-Konverzacia.o: Konverzacia.cpp.o
-
-.PHONY : Konverzacia.o
-
-# target to build an object file
-Konverzacia.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Konverzacia.cpp.o
-.PHONY : Konverzacia.cpp.o
-
-Konverzacia.i: Konverzacia.cpp.i
-
-.PHONY : Konverzacia.i
-
-# target to preprocess a source file
-Konverzacia.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Konverzacia.cpp.i
-.PHONY : Konverzacia.cpp.i
-
-Konverzacia.s: Konverzacia.cpp.s
-
-.PHONY : Konverzacia.s
-
-# target to generate assembly for a file
-Konverzacia.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Konverzacia.cpp.s
-.PHONY : Konverzacia.cpp.s
-
 Moznosti.o: Moznosti.cpp.o
 
 .PHONY : Moznosti.o
@@ -265,6 +238,33 @@ Moznosti.s: Moznosti.cpp.s
 Moznosti.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Moznosti.cpp.s
 .PHONY : Moznosti.cpp.s
+
+Nacitavac.o: Nacitavac.cpp.o
+
+.PHONY : Nacitavac.o
+
+# target to build an object file
+Nacitavac.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Nacitavac.cpp.o
+.PHONY : Nacitavac.cpp.o
+
+Nacitavac.i: Nacitavac.cpp.i
+
+.PHONY : Nacitavac.i
+
+# target to preprocess a source file
+Nacitavac.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Nacitavac.cpp.i
+.PHONY : Nacitavac.cpp.i
+
+Nacitavac.s: Nacitavac.cpp.s
+
+.PHONY : Nacitavac.s
+
+# target to generate assembly for a file
+Nacitavac.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Nacitavac.cpp.s
+.PHONY : Nacitavac.cpp.s
 
 Pomocna.o: Pomocna.cpp.o
 
@@ -293,33 +293,6 @@ Pomocna.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Pomocna.cpp.s
 .PHONY : Pomocna.cpp.s
 
-Pouzivatel.o: Pouzivatel.cpp.o
-
-.PHONY : Pouzivatel.o
-
-# target to build an object file
-Pouzivatel.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Pouzivatel.cpp.o
-.PHONY : Pouzivatel.cpp.o
-
-Pouzivatel.i: Pouzivatel.cpp.i
-
-.PHONY : Pouzivatel.i
-
-# target to preprocess a source file
-Pouzivatel.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Pouzivatel.cpp.i
-.PHONY : Pouzivatel.cpp.i
-
-Pouzivatel.s: Pouzivatel.cpp.s
-
-.PHONY : Pouzivatel.s
-
-# target to generate assembly for a file
-Pouzivatel.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Pouzivatel.cpp.s
-.PHONY : Pouzivatel.cpp.s
-
 Prihlasenie.o: Prihlasenie.cpp.o
 
 .PHONY : Prihlasenie.o
@@ -346,33 +319,6 @@ Prihlasenie.s: Prihlasenie.cpp.s
 Prihlasenie.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Prihlasenie.cpp.s
 .PHONY : Prihlasenie.cpp.s
-
-Sprava.o: Sprava.cpp.o
-
-.PHONY : Sprava.o
-
-# target to build an object file
-Sprava.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Sprava.cpp.o
-.PHONY : Sprava.cpp.o
-
-Sprava.i: Sprava.cpp.i
-
-.PHONY : Sprava.i
-
-# target to preprocess a source file
-Sprava.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Sprava.cpp.i
-.PHONY : Sprava.cpp.i
-
-Sprava.s: Sprava.cpp.s
-
-.PHONY : Sprava.s
-
-# target to generate assembly for a file
-Sprava.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Sprava.cpp.s
-.PHONY : Sprava.cpp.s
 
 SpravaKonverzacii.o: SpravaKonverzacii.cpp.o
 
@@ -427,6 +373,33 @@ SpravaPriatelstiev.s: SpravaPriatelstiev.cpp.s
 SpravaPriatelstiev.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/SpravaPriatelstiev.cpp.s
 .PHONY : SpravaPriatelstiev.cpp.s
+
+Zapisovac.o: Zapisovac.cpp.o
+
+.PHONY : Zapisovac.o
+
+# target to build an object file
+Zapisovac.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Zapisovac.cpp.o
+.PHONY : Zapisovac.cpp.o
+
+Zapisovac.i: Zapisovac.cpp.i
+
+.PHONY : Zapisovac.i
+
+# target to preprocess a source file
+Zapisovac.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Zapisovac.cpp.i
+.PHONY : Zapisovac.cpp.i
+
+Zapisovac.s: Zapisovac.cpp.s
+
+.PHONY : Zapisovac.s
+
+# target to generate assembly for a file
+Zapisovac.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Zapisovac.cpp.s
+.PHONY : Zapisovac.cpp.s
 
 client.o: client.cpp.o
 
@@ -498,30 +471,27 @@ help:
 	@echo "... Hash.o"
 	@echo "... Hash.i"
 	@echo "... Hash.s"
-	@echo "... Konverzacia.o"
-	@echo "... Konverzacia.i"
-	@echo "... Konverzacia.s"
 	@echo "... Moznosti.o"
 	@echo "... Moznosti.i"
 	@echo "... Moznosti.s"
+	@echo "... Nacitavac.o"
+	@echo "... Nacitavac.i"
+	@echo "... Nacitavac.s"
 	@echo "... Pomocna.o"
 	@echo "... Pomocna.i"
 	@echo "... Pomocna.s"
-	@echo "... Pouzivatel.o"
-	@echo "... Pouzivatel.i"
-	@echo "... Pouzivatel.s"
 	@echo "... Prihlasenie.o"
 	@echo "... Prihlasenie.i"
 	@echo "... Prihlasenie.s"
-	@echo "... Sprava.o"
-	@echo "... Sprava.i"
-	@echo "... Sprava.s"
 	@echo "... SpravaKonverzacii.o"
 	@echo "... SpravaKonverzacii.i"
 	@echo "... SpravaKonverzacii.s"
 	@echo "... SpravaPriatelstiev.o"
 	@echo "... SpravaPriatelstiev.i"
 	@echo "... SpravaPriatelstiev.s"
+	@echo "... Zapisovac.o"
+	@echo "... Zapisovac.i"
+	@echo "... Zapisovac.s"
 	@echo "... client.o"
 	@echo "... client.i"
 	@echo "... client.s"

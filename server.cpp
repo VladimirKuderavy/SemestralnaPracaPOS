@@ -10,11 +10,8 @@
 #include <pthread.h>
 #include "Data.h"
 #include "Prihlasenie.h"
-
 #include "Moznosti.h"
 #include "Konstanty.h"
-
-
 
 typedef struct dataClientVlakno {
     int clientSocket;
@@ -56,10 +53,6 @@ void* vlaknoFunkcia(void* param) {
     //Po úspešnom vytvorení spojenia vráti accept deskriptor socketu reprezentujúceho spojenie s konkrétnym klientom.
     // V danom čase môže byť takýchto spojení vytvorených viacero súčasne a každé je identifikované vlastným deskriptorom.
 
-    //close the listening
-
-
-
     bool odpojiloHo = false;
 
     while(!odpojiloHo) {
@@ -67,8 +60,6 @@ void* vlaknoFunkcia(void* param) {
         if(pouzivatel == nullptr) {
             break;
         }
-
-        //std::cout << *pouzivatel->getMeno() << " " << std::to_string(clientSocket);
 
         if(Moznosti::vyberSiMoznost(pouzivatel, data, socketAMutex)) {
             odpojiloHo = true;
@@ -96,7 +87,6 @@ void* funckiaVytvaracKlientov(void* dataPar) {
     //1. paraameter - komunikacna domena - AF_INET = sockety umožňujúce komunikáciu pomocou protokolov založených na IPv4
     //2. parameter - typ socketu - SOCK_STREAM = spoľahlivá, obojsmerná, spojovo-orientovaná služba na prenos zoradenej sekvencie bajtov.
     //3. protokol - mohol by specifikovat dalsie vlastnosti socketu
-
 
 
     int listening = socket(AF_INET, SOCK_STREAM, 0);
@@ -194,12 +184,8 @@ void* funckiaVytvaracKlientov(void* dataPar) {
 
 int main() {
 
-
-
     Data* data = new Data();
     data->nacitajVsetko();
-
-
 
     std::vector<pthread_t> klienti;
     DATAAVLAKNA dataAVlakna = {
@@ -209,21 +195,6 @@ int main() {
 
     pthread_t vytvaracKlientov;
     pthread_create(&vytvaracKlientov, NULL, &funckiaVytvaracKlientov, &dataAVlakna);
-
-
-    /*
-    for(int i = 0; i < POCET_KLIENTOV; i++) {
-        pthread_create(&vlakna[i], NULL, &vlaknoFunkcia, &dataacislokportu[i]);
-    }
-    */
-
-
-    /*
-    for(int i = 0; i < POCET_KLIENTOV; i++) {
-        pthread_join(vlakna[i], NULL);
-    }
-    */
-
 
     while(true) {
         std::string koniec;
@@ -238,10 +209,12 @@ int main() {
 
 
     pthread_mutex_lock(data->getMutex());
+
     for(int i = 0; i < klienti.size(); i++) {
         pthread_cancel(klienti[i]);
         pthread_join(klienti[i], NULL);
     }
+
     pthread_cancel(vytvaracKlientov);
     pthread_join(vytvaracKlientov, NULL);
     pthread_mutex_unlock(data->getMutex());

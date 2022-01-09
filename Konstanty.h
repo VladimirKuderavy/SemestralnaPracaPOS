@@ -5,7 +5,6 @@
 #include <string>
 
 #define PORT 6461
-#define POCET_KLIENTOV 2
 
 class Konstanty {
 

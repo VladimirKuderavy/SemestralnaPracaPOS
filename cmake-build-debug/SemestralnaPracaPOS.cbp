@@ -144,9 +144,6 @@
 			<Option target="client"/>
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.bnEpdsMGjj/Konverzacia.cpp">
-			<Option target="server"/>
-		</Unit>
 		<Unit filename="/tmp/tmp.bnEpdsMGjj/Konverzacia.h">
 			<Option target="server"/>
 		</Unit>
@@ -154,6 +151,9 @@
 			<Option target="server"/>
 		</Unit>
 		<Unit filename="/tmp/tmp.bnEpdsMGjj/Moznosti.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Nacitavac.cpp">
 			<Option target="server"/>
 		</Unit>
 		<Unit filename="/tmp/tmp.bnEpdsMGjj/Nacitavac.h">
@@ -165,9 +165,6 @@
 		<Unit filename="/tmp/tmp.bnEpdsMGjj/Pomocna.h">
 			<Option target="server"/>
 		</Unit>
-		<Unit filename="/tmp/tmp.bnEpdsMGjj/Pouzivatel.cpp">
-			<Option target="server"/>
-		</Unit>
 		<Unit filename="/tmp/tmp.bnEpdsMGjj/Pouzivatel.h">
 			<Option target="server"/>
 		</Unit>
@@ -175,12 +172,6 @@
 			<Option target="server"/>
 		</Unit>
 		<Unit filename="/tmp/tmp.bnEpdsMGjj/Prihlasenie.h">
-			<Option target="server"/>
-		</Unit>
-		<Unit filename="/tmp/tmp.bnEpdsMGjj/Sprava.cpp">
-			<Option target="server"/>
-		</Unit>
-		<Unit filename="/tmp/tmp.bnEpdsMGjj/Sprava.h">
 			<Option target="server"/>
 		</Unit>
 		<Unit filename="/tmp/tmp.bnEpdsMGjj/SpravaKonverzacii.cpp">
@@ -193,6 +184,9 @@
 			<Option target="server"/>
 		</Unit>
 		<Unit filename="/tmp/tmp.bnEpdsMGjj/SpravaPriatelstiev.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.bnEpdsMGjj/Zapisovac.cpp">
 			<Option target="server"/>
 		</Unit>
 		<Unit filename="/tmp/tmp.bnEpdsMGjj/Zapisovac.h">

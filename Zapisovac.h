@@ -10,37 +10,12 @@
 
 class Zapisovac {
 
-
 public:
-    static void zapisPozivatelov(std::string& pouzivatelia) {
-        std::ofstream subor(Konstanty::getNazovSuboruPouzivatelov());
+    static void zapisPozivatelov(std::string& pouzivatelia);
 
-        subor << pouzivatelia;
+    static void zapisPriatelovPouzivatelov(std::string& priateliaPouzivatelov);
 
-        subor.close();
-    }
+    static void zapisZiadostiOPriatelstvoPouzivatelov(std::string& ziadostiOPriatelstvo);
 
-    static void zapisPriatelovPouzivatelov(std::string& priateliaPouzivatelov) {
-        std::ofstream subor(Konstanty::getNazovSuboruPriatelov());
-
-        subor << priateliaPouzivatelov;
-
-        subor.close();
-    }
-
-    static void zapisZiadostiOPriatelstvoPouzivatelov(std::string& ziadostiOPriatelstvo) {
-        std::ofstream subor(Konstanty::getNazovSuboruZiadosti());
-
-        subor << ziadostiOPriatelstvo;
-
-        subor.close();
-    }
-
-    static void zapisNeprecitanychSpravPouzivatelov(std::string& neprecitaneSpravy) {
-        std::ofstream subor(Konstanty::getNazovSuboruNeprecitanychSprav());
-
-        subor << neprecitaneSpravy;
-
-        subor.close();
-    }
+    static void zapisNeprecitanychSpravPouzivatelov(std::string& neprecitaneSpravy);
 };
