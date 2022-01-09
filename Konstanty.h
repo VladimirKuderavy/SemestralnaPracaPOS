@@ -10,25 +10,24 @@ class Konstanty {
 
 public:
     static std::string getNazovSuboruPouzivatelov() {
-        return "/tmp/tmp.bnEpdsMGjj/pouzivatelia.txt";
+        return "pouzivatelia.txt";
     }
 
     static std::string getNazovSuboruPriatelov() {
-        return "/tmp/tmp.bnEpdsMGjj/priatelia.txt";
+        return "priatelia.txt";
     }
 
     static std::string getNazovSuboruNeprecitanychSprav() {
-        return "/tmp/tmp.bnEpdsMGjj/spravy.txt";
+        return "spravy.txt";
     }
 
     static std::string getNazovSuboruZiadosti() {
-        return "/tmp/tmp.bnEpdsMGjj/ziadosti.txt";
+        return "ziadosti.txt";
     }
 
     static std::string getTextVstupDoModuNacitajSubor() {
         return "<#nacitajSubor#>";
     }
-
 
     static std::string getTextSuborSaNepodariloNacitat() {
         return "<#nenacitalSa#>";
@@ -38,6 +37,7 @@ public:
         return "<#ulozSubor#>";
     }
 
+    //treba nastavit relativnu cestu k svojmu projektu na linux serveri
     static std::string getRelativnaCesta() {
         return "/tmp/tmp.bnEpdsMGjj/clientPriecinok/";
     }
