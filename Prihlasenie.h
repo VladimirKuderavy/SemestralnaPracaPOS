@@ -26,7 +26,7 @@ public:
             std::string stringSprava = "Zvoľte si možnosť: \n";
             stringSprava+= "[1] Prihlásiť sa\n";
             stringSprava+= "[2] Zaregistrovať sa\n";
-
+            stringSprava+= "[koniec] Ukoncenie aplikacie\n";
             PomocnaTrieda::odosliSpravu(stringSprava, socketAMutex);
 
 
